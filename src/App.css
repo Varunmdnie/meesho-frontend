@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,67 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+
+
+/* Style the dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 3;
+}
+
+/* Style the dropdown button */
+.dropdown-button {
+  /* background-color: #3498db; */
+  /* color: white; */
+  /* padding: 10px; */
+  /* font-size: 30px; */
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  color: black;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+  /* border: 2px solid black; */
+  display: none;
+  position: absolute;
+  right: -65px;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of links on hover */
+.dropdown-content a:hover {
+  background-color: #edafaf;
+}
+
+/* Show the dropdown content when hovering over the dropdown container */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Style the button on hover */
+/* .dropdown:hover .dropdown-button {
+  background-color: #2980b9;
+} */
+
+.vertical-line {
+  border-left: 2px solid rgb(206, 199, 199); /* Border width and color */
+  height: 50px; /* Line height */
+  margin-left: 20px; /* Optional, to add spacing */
+  margin-right: 20px;
 }
