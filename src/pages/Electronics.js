@@ -1,7 +1,18 @@
+import Navbar from "../components/Navbar"
+import products from "../data"
+import ProductItem from "../components/ProductItem"
+
 function Electronics(){
+    let elctronics = products.filter((el) =>el.category === 'Electronics')
     return(
         <>
-        <h1>this is Electronics page </h1>
+        <Navbar/>
+        <div className=" row container">
+            {
+                elctronics.map((item) => <ProductItem product={item}/>)
+            }
+
+        </div>
         </>
     )
 }

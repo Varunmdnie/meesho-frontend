@@ -17,8 +17,8 @@ function ProfileDropdown() {
                 </div>
 
                 <div className="dropdown-content">
-                    <Link to="/profile">Sign up</Link>
-                    <Link to="#">My Orders</Link>
+                    <Link to="/profile">Login</Link>
+                    <Link to="/signup">Sign Up</Link>
                     <Link to="#">Delete Account</Link>
                 </div>
             </div>

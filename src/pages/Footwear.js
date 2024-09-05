@@ -1,7 +1,18 @@
+import Navbar from "../components/Navbar"
+import products from "../data"
+import ProductItem from "../components/ProductItem"
+
 function Footwear(){
+    let footwear = products.filter((el) =>el.subCategory === 'footwear')
     return(
         <>
-        <h1>this is Footwear page </h1>
+        <Navbar/>
+        <div className=" row container">
+            {
+                footwear.map((item) => <ProductItem product={item}/>)
+            }
+
+        </div>
         </>
     )
 }

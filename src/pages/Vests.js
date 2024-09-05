@@ -1,7 +1,21 @@
+import Navbar from "../components/Navbar"
+import products from "../data"
+import ProductItem from "../components/ProductItem"
+
+
+
 function Vests(){
+    let vests = products.filter((el) =>el.subCategory === 'vests')
+   
+        
     return(
         <>
-        <h1>Vests Page</h1>
+        <Navbar/>
+        <div className="container row">
+        {
+            vests.map((item) => <ProductItem product={item}/>)
+        }
+        </div>
         </>
     )
 }

@@ -1,7 +1,10 @@
 import Category from "../filters/Category"
-import Color from "../filters/Color"
+
 import Rating from "../filters/Rating"
 import Price from "../filters/Price"
+
+
+
 
 function Sidebar({applyFilter}) {
 
@@ -12,11 +15,13 @@ function Sidebar({applyFilter}) {
       
     return (
         <>
-         <Category categoryFilter={applyFilter}/>
-        <Color/>
+     
+        <Category categoryFilter={applyFilter}/>
+       
         
-        <Price/>
-        <Rating/>
+        
+        <Price  priceFilter={applyFilter}/>
+        <Rating rateFilter={applyFilter}/>
         
 
         </>

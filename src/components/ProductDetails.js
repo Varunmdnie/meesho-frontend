@@ -1,10 +1,23 @@
 import { Link } from "react-router-dom"
 import { BsCartPlusFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { AddToCart } from "../actions/CartActions";
+
 
 
 
 
 function ProductDetails({ product }) {
+
+    let dispatch = useDispatch()
+
+    let handleCartClick = () =>{
+        dispatch(AddToCart(product))
+    }
+
+
+
+
     return (
         <>
             <section className="bg-light ">
@@ -16,8 +29,8 @@ function ProductDetails({ product }) {
                                 <img className="card-img img-fluid" src={product?.image} alt="" id="product-detail" />
                             </div>
                             <div className=" d-flex justify-content-between   " style={{ width: "92%" }}>
-                                <button className="btn btn-outline-info btn-lg m-1 w-50"><Link className="text-decoration-none text-secondary  " to="#">< BsCartPlusFill /> Add to Cart</Link></button>
-                                <button className="btn btn-info btn-lg w-50 m-1"><Link className="text-decoration-none text-secondary" to="#">Buy Now</Link></button>
+                              <Link className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-50" onClick={handleCartClick} to="#">< BsCartPlusFill /> Add to Cart</Link>
+                            <Link className="text-decoration-none text-secondary btn btn-info btn-lg w-50 m-1" onClick={handleCartClick} to="#">Buy Now</Link>
                             </div>
 
                         </div>

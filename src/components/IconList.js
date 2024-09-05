@@ -6,8 +6,10 @@ import ProfileDropdown from "../dropdowns/ProfileDropdown";
 
 
 
+
 const IconList = () => {
     // const cartCounter = useSelector(state => state.cart.cartCounter); 
+   
     return (
         <>
         <div className="d-flex pr-2">
@@ -18,13 +20,21 @@ const IconList = () => {
                  
                 </div>
            
-            <Link to='/cart' className="dropdown-button text-dark">
-                <div>
+            <Link to='#' className="dropdown-button text-dark">
+                
+
+                    <div className="d-flex">
                     <h4 style={{color:"grey"}}>< BsCartPlusFill /></h4>
-                    <p>Cart</p>
+                    <p className=""></p>
+                    </div>
+
+                   
+                  
+                    <p>Cart </p>
+                    
                    
                     
-                </div>
+               
             </Link>
             </div>
 

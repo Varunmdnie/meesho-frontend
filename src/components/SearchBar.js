@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom"
 function SearchBar() {
     return (
         <>
@@ -11,15 +11,15 @@ function SearchBar() {
                     <div className="dropdown-menu w-100" aria-labelledby="searchBar">
                         <h5 className="text-muted">Popular Searches</h5>
                         
-                        <span class="btn btn-outline-secondary rounded-pill m-2">Saree</span>
-                        <span class="btn btn-outline-secondary rounded-pill m-2">Pants</span>
-                        <span class="btn btn-outline-secondary rounded-pill m-2">Kurtas</span>
-                        <span class="btn btn-outline-secondary rounded-pill m-2">Tops</span>
+                        <Link to='/saree' class="btn btn-outline-secondary rounded-pill m-2">Saree</Link>
+                        <Link to='/pants' class="btn btn-outline-secondary rounded-pill m-2">Pants</Link>
+                        <Link to='/kurtas' class="btn btn-outline-secondary rounded-pill m-2">Kurtas</Link>
+                        <Link to='/tops' class="btn btn-outline-secondary rounded-pill m-2">Tops</Link>
                         
-                        <span class="btn btn-outline-secondary rounded-pill m-2">shirts</span>
-                        <span class="btn btn-outline-secondary rounded-pill m-2">toys</span>
-                        <span class="btn btn-outline-secondary rounded-pill m-2">frocks</span>
-                        <span class="btn btn-outline-secondary rounded-pill m-2">jeans</span>
+                        <Link to='/shirts' class="btn btn-outline-secondary rounded-pill m-2">shirts</Link>
+                        <Link to='/toys' class="btn btn-outline-secondary rounded-pill m-2">toys</Link>
+                        <Link to='/frocks' class="btn btn-outline-secondary rounded-pill m-2">frocks</Link>
+                   
 
                         
                        

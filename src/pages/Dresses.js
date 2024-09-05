@@ -1,10 +1,17 @@
 import Navbar from "../components/Navbar"
+import products from "../data"
+import ProductItem from "../components/ProductItem"
 
 function Dresses(){
+    let dresses = products.filter((el) =>el.subCategory === 'dresses')
     return(
         <>
         <Navbar/>
-        <h1>this is Dresses page</h1>
+        <div className="container row">
+        {
+            dresses.map((item) => <ProductItem product={item}/>)
+        }
+        </div>
         </>
     )
 }

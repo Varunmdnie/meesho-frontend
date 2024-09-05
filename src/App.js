@@ -1,27 +1,6 @@
 
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Landing from './pages/Landing';
-import WomenEthnic from './pages/WomenEthnic';
-import WomenWestern from './pages/WomenWestern';
-import Mens from './pages/Mens';
-import Kids from './pages/Kids';
-import HomeKitchen from './pages/HomeKitchen';
-import Beauty from './pages/Beauty';
-import Footwear from './pages/Footwear';
-import Electronics from './pages/Electronics';
-import Profile from './pages/Profile';
-import Saree from './pages/Saree';
-import Kurtas from './pages/Kurtas';
-import Tops from './pages/Tops';
-import Dresses from './pages/Dresses';
-import Tshirts from './pages/Tshirts';
-import Shirts from './pages/Shirts';
-import Pants from './pages/Pants';
-import Vests from './pages/Vests';
-import Frocks from './pages/Frocks';
-import Toys from './pages/Toys';
-import Details from './pages/Details';
+import Main from './routes/Main';
 
 
 
@@ -29,46 +8,7 @@ function App() {
 
   return (
     <>
-
-      <BrowserRouter>
-        <Routes>
-          <Route path='/'>
-            <Route index element={<Landing />} />
-
-            <Route path='/womenethnic' element={<WomenEthnic />} />
-            <Route path='/saree' element={<Saree />} />
-            <Route path='/kurtas' element={<Kurtas />} />
-            
-
-
-            <Route path='/womenwestern' element={<WomenWestern />} />
-            <Route path='/tops' element={<Tops />} />
-            <Route path='/dresses' element={<Dresses />} />
-
-            <Route path='/men' element={<Mens />} />
-            <Route path='/tshirts' element={<Tshirts />} />
-            <Route path='/shirts' element={<Shirts />} />
-            <Route path='/pants' element={<Pants />} />
-            <Route path='/vests' element={<Vests />} />
-
-            <Route path='/kids' element={<Kids />} />
-            <Route path='/frocks' element={<Frocks />} />
-            <Route path='/toys' element={<Toys />} />
-
-            <Route path='/home' element={<HomeKitchen />} />
-            <Route path='/beauty' element={<Beauty />} />
-            <Route path='/footwear' element={<Footwear />} />
-            <Route path='/electronics' element={<Electronics />} />
-
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/details/:id' element= {<Details/>}/>
-           
-          
-
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
+    <Main/>
 
     </>
   )

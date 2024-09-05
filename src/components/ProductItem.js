@@ -14,10 +14,10 @@ function ProductItem({ product }) {
 
     return (
         <>
-            <div className="col-lg-3 col-sm-12 col-md-6 d-flex my-3 ">
+            <div className="col-lg-3 col-sm-6 col-md-4 d-flex my-3 ">
                 <Link className="text-decoration-none" to={{ pathname: `/details/${product.id}` }} onClick={handleProductClick}>
-                    <div className="card" style={{ width: "16rem" }} >
-                        <img height={"300px"} src={product.image} className="card-img-top" alt={product.title} />
+                    <div className="card" style={{ width: "14rem" }} >
+                        <img height={"280px"} src={product.image} className="card-img-top" alt={product.title} />
 
                         <div className="card-body">
                             <h6 className="card-title text-muted">{product.title}</h6>
