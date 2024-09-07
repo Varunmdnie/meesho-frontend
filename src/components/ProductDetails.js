@@ -30,7 +30,7 @@ function ProductDetails({ product }) {
                             </div>
                             <div className=" d-flex justify-content-between   " style={{ width: "92%" }}>
                               <Link className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-50" onClick={handleCartClick} to="#">< BsCartPlusFill /> Add to Cart</Link>
-                            <Link className="text-decoration-none text-secondary btn btn-info btn-lg w-50 m-1" onClick={handleCartClick} to="#">Buy Now</Link>
+                            <Link className="text-decoration-none text-light btn btn-primary btn-lg w-50 m-1" onClick={handleCartClick} to="/cart">Buy Now</Link>
                             </div>
 
                         </div>
@@ -51,22 +51,22 @@ function ProductDetails({ product }) {
                                 </div>
                             </div>
 
-                            <div className="card mt-4" style={{ width: "40rem" }}>
+                            {/* <div className="card mt-4" style={{ width: "40rem" }}>
                                 <div class="card-body">
                                     <h3 className="card-title">Select Size</h3>
 
                                     {product.size.map((el, i) => (
-                                         <span key={i} class="btn btn-outline-secondary rounded m-2">{el}</span>
+                                         <Link key={i} class="btn btn-outline-secondary rounded m-2">{el}</Link>
                                      
                                     ))}
-
+ 
 
 
 
 
                                    
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="card mt-4" style={{ width: "40rem" }}>
                                 <div class="card-body">

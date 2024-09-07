@@ -1,18 +1,34 @@
+export const ADD_TO_CART = 'ADD_TO_CART'
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const INCREMENT_QUANTITY = "INCREMENT_QUANTITY";
+export const DECREMENT_QUANTITY = "DECREMENT_QUANTITY";
+
+
+
 
 export let AddToCart = (item) =>({
     payload:item,
     type:"ADD_TO_CART"
 })
 
-export let RemoveFromCart = (item) => ({
-    payload:item,
+export let RemoveFromCart = (id) => ({
+    payload:id,
     type:"REMOVE_FROM_CART"
 })
 
-export let IncrementCartCounter = () => ({
-    type:"INCREMENT_CART_COUNTER"
-})
 
-export let DecrementCartCounter = () => ({
-    type:"DECREMENT_CART_COUNTER"
-})
+export const IncrementQuantity = (id) => {
+    return {
+      type: 'INCREMENT_QUANTITY',
+      payload: id, // id of the item to increment
+    };
+  };
+  
+  export const DecrementQuantity = (id) => {
+    return {
+      type: 'DECREMENT_QUANTITY',
+      payload: id, // id of the item to decrement
+    };
+  };
+
+
