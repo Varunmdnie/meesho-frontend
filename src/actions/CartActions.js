@@ -17,17 +17,19 @@ export let RemoveFromCart = (id) => ({
 })
 
 
+
+
 export const IncrementQuantity = (id) => {
     return {
       type: 'INCREMENT_QUANTITY',
-      payload: id, // id of the item to increment
+      payload: id
     };
   };
   
   export const DecrementQuantity = (id) => {
     return {
       type: 'DECREMENT_QUANTITY',
-      payload: id, // id of the item to decrement
+      payload: id
     };
   };
 

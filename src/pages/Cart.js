@@ -35,13 +35,6 @@ function Cart(){
       };
 
 
- 
-
-  
-
-
-
-
 
     return(
 
@@ -62,8 +55,8 @@ function Cart(){
                                 </div>
                                 <div className='col-md-2'> <h5 className=" text-center"> </h5>
                                 </div>
-                                {/* <div className='col-md-1'> <h5 className="text-center">Size</h5>
-                                </div> */}
+                                <div className='col-md-1'> <h5 className="text-center">Size</h5>
+                                </div>
                                 <div className='col-md-1'><h5 className="text-center"> Price</h5>
                                 </div>
                                 <div className='col-md-2'><h5 className="text-center">Qty</h5>
@@ -81,15 +74,15 @@ function Cart(){
                                  
                                     <div className="row py-4" key={item.id}>
                                         <div className='col-md-5 d-flex'>
-                                            <img src={item.image} alt={item.title} style={{ width: "80px", height: "80px" }} />
+                                            <img  src={item.image} alt={item.title} style={{ width: "80px", height: "80px" }} />
                                             <h6 className='ps-3'>{item.title}</h6>
                                         </div>
                                         <div className='col-md-2'>
                                             <Link onClick={() => handleRemove(item.id)} className='text-end btn btn-primary btn-sm'>remove</Link>
                                         </div>
-                                        {/* <div className='col-md-1'>
+                                        <div className='col-md-1'>
                                             <p className='text-center'>{item.selectedSize || item.size[0]}</p>
-                                        </div> */}
+                                        </div>
                                         <div className='col-md-1'>
                                             <p className='text-center'>
                                                 {item.price}

@@ -5,11 +5,11 @@ import { search$ } from '../state';
 function SearchBar() {
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Debounce the search term
+   
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
                 search$.next(searchTerm);
-        }, 500); // Adjust debounce delay (500ms in this case)
+        }, 500); 
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);

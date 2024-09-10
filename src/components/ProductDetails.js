@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
 import { BsCartPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { AddToCart } from "../actions/CartActions";
+import { AddToCart} from "../actions/CartActions";
+import {  useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -9,10 +12,22 @@ import { AddToCart } from "../actions/CartActions";
 
 function ProductDetails({ product }) {
 
+    let [selectedSize, setSelectedSize] = useState('')
+  
     let dispatch = useDispatch()
 
     let handleCartClick = () =>{
-        dispatch(AddToCart(product))
+        if (!selectedSize) {
+            toast.error('Please select a size before adding to the cart.');
+            return;
+        }
+       
+        dispatch(AddToCart({ ...product, selectedSize }));
+        toast.success('Product added to cart')
+    }
+
+    let handleSizeSelection = (size) => {
+        setSelectedSize(size)
     }
 
 
@@ -20,6 +35,10 @@ function ProductDetails({ product }) {
 
     return (
         <>
+           <ToastContainer 
+           position="top-right"
+           autoClose='2000'
+           />
             <section className="bg-light ">
                 <div className="container">
                     <div className="row ">
@@ -51,22 +70,18 @@ function ProductDetails({ product }) {
                                 </div>
                             </div>
 
-                            {/* <div className="card mt-4" style={{ width: "40rem" }}>
+                            <div className="card mt-4" style={{ width: "40rem" }}>
                                 <div class="card-body">
                                     <h3 className="card-title">Select Size</h3>
 
                                     {product.size.map((el, i) => (
-                                         <Link key={i} class="btn btn-outline-secondary rounded m-2">{el}</Link>
+                                         <span key={i} class="btn btn-outline-secondary rounded m-2" onClick={()=>handleSizeSelection(el)}>{el}</span>
                                      
                                     ))}
  
-
-
-
-
-                                   
+   
                                 </div>
-                            </div> */}
+                            </div>
 
                             <div className="card mt-4" style={{ width: "40rem" }}>
                                 <div class="card-body">
@@ -78,7 +93,7 @@ function ProductDetails({ product }) {
                     </div>
                 </div>
             </section>
-
+            
 
         </>
     )

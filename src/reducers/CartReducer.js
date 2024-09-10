@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART} from "../actions/CartActions";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/CartActions";
 
 
 const initialState = JSON.parse(localStorage.getItem("cart")) || {
@@ -18,7 +18,7 @@ const CartReducer = (state = initialState, action) => {
       let updatedTotalPrice;
 
       if (existingItemIndex !== -1) {
-  
+
         updatedCartItems = state.cartItems.map((item, index) => {
           if (index === existingItemIndex) {
             const updatedQuantity = item.quantity + 1;
@@ -28,22 +28,20 @@ const CartReducer = (state = initialState, action) => {
         });
         updatedTotalPrice = state.totalPrice + action.payload.price;
       } else {
-       
-        updatedCartItems = [...state.cartItems, { ...action.payload, quantity: 1, total_item_price: action.payload.price, selectedSize: action.payload.size[0] }];
+
+        updatedCartItems = [...state.cartItems, { ...action.payload, quantity: 1, total_item_price: action.payload.price}];
         updatedTotalPrice = state.totalPrice + action.payload.price;
       }
 
       const updatedGrandTotal = updatedTotalPrice + state.deliveryCharges;
 
-      
+
       const updatedState = {
         ...state,
         cartItems: updatedCartItems,
         cartCounter: state.cartCounter + 1,
         totalPrice: updatedTotalPrice,
         grandTotal: updatedGrandTotal,
-        selectedSize: action.payload.size[0]
-        
       };
       // console.warn(updatedState)
       localStorage.setItem("cart", JSON.stringify(updatedState));
@@ -53,16 +51,16 @@ const CartReducer = (state = initialState, action) => {
 
     case REMOVE_FROM_CART: {
       const removedItem = state.cartItems.find(item => item.id === action.payload);
-      if (!removedItem) return state;  
+      if (!removedItem) return state;
 
-      
+
       const updatedCartItems = state.cartItems.filter(item => item.id !== action.payload);
 
-     
+
       const updatedTotalPrice = state.totalPrice - (removedItem.price * removedItem.quantity);
       const updatedGrandTotal = updatedTotalPrice + state.deliveryCharges;
 
-      
+
       const updatedState = {
         ...state,
         cartItems: updatedCartItems,
@@ -117,7 +115,7 @@ const CartReducer = (state = initialState, action) => {
       const updatedTotalPrice = state.totalPrice - removedItem.price;
       const updatedGrandTotal = updatedTotalPrice + state.deliveryCharges;
 
-       const updatedState= {
+      const updatedState = {
         ...state,
         cartItems: updatedCartItems,
         cartCounter: state.cartCounter - 1,
