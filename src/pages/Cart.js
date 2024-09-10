@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useDispatch } from "react-redux";
 import { RemoveFromCart } from "../actions/CartActions";
 import { IncrementQuantity } from "../actions/CartActions";
 import { DecrementQuantity } from "../actions/CartActions";
+import SetCurrentProduct from "../actions/SetCurrentProduct";
 
 
 
@@ -18,7 +19,7 @@ function Cart(){
     const deliveryCharges = useSelector(state => state.cart.deliveryCharges);
     const grandTotal = useSelector(state => state.cart.grandTotal);
 
-
+    let navigate = useNavigate()
 
     let dispatch = useDispatch()
 
@@ -33,6 +34,11 @@ function Cart(){
       const handleDecrement = (id) => {
         dispatch(DecrementQuantity(id));
       };
+
+      const handleImageClick = (product) =>{
+        dispatch(SetCurrentProduct(product))
+        navigate(`/details/${product.id}`)
+      }
 
 
 
@@ -74,7 +80,7 @@ function Cart(){
                                  
                                     <div className="row py-4" key={item.id}>
                                         <div className='col-md-5 d-flex'>
-                                            <img  src={item.image} alt={item.title} style={{ width: "80px", height: "80px" }} />
+                                            <img  src={item.image} alt={item.title} style={{ width: "80px", height: "80px" }} onClick={() => handleImageClick(item)} />
                                             <h6 className='ps-3'>{item.title}</h6>
                                         </div>
                                         <div className='col-md-2'>

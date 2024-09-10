@@ -8,6 +8,7 @@ let products = [
         description: `This shirt is made from pure cotton premier quality fabric and it is suitable to wear in meetings, party,
          festivals all light colors will give you attractive look Country of Origin`,
         image: 'https://images.meesho.com/images/products/325087198/ly57z_400.webp',
+        imageSmall:'https://images.meesho.com/images/products/216426123/e1q4g_512.webp',
         rating: { rate: 3.9, count: 6014 },
         size:['S','M','L','XL'],
         color:['white','green','pink']
@@ -20,6 +21,7 @@ let products = [
     price: 507,
     description: ` Beautiful Banarasi Silk Red Brocade Saree With Blouse`,
     image: 'https://images.meesho.com/images/products/47039975/5oyew_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/325100981/uokgq_512.webp',
     rating: { rate: 3.9, count: 20378 },
     size:['FreeSize'],
     color:['white','green','pink','red','yellow']
@@ -32,6 +34,7 @@ let products = [
     price: 268,
     description: `Beautiful Gym vests for men`,
     image: 'https://images.meesho.com/images/products/197642006/4wv6o_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/334737142/flgmd_512.webp',
     rating: { rate: 4.6, count: 614 },
     size:['M','L','XL'],
     color:['white','green','pink','blue']
@@ -45,6 +48,7 @@ let products = [
     description: `Girls Baby Frock , Sleeveless , Summer wear , FANCY FROCK FOR GIRLS ,
      white summer casual frock, Baby Girls summer casual loose fit printing short sleeve frock and dress`,
     image: 'https://images.meesho.com/images/products/364652228/sfyoi_512.webp',
+    imageSmall:'https://images.meesho.com/images/products/364652228/t4dml_512.webp',
     rating: { rate: 4, count: 6014 },
     size:['S','M'],
     color:['white','green','pink','orange']
@@ -69,6 +73,7 @@ let products = [
     price: 461,
     description: `Mesh Running/Walking/Gym Sports Shoes For Men Pack of 2`,
     image: 'https://images.meesho.com/images/products/333942837/mkg6o_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/333942837/kkbfo_512.webp',
     rating: { rate: 4.3, count: 6914 },
     size:['6','7','8','9'],
     color:['white','green','pink','black']
@@ -82,6 +87,7 @@ let products = [
     description: `With the intelligent chip inside, dual USB wall charger matches the current as your device's need automatically. Over-current, 
     over-voltage and short-circuit protection also effectively protect your smartphones from damage`,
     image: 'https://images.meesho.com/images/products/427657739/c627h_512.webp',
+    imageSmall:'https://images.meesho.com/images/products/403125586/1xmjp_64.webp',
     rating: { rate: 4.9, count: 3017 },
     size:['FreeSize']
   
@@ -94,6 +100,7 @@ let products = [
     price: 289,
     description: `New Joganiy Kurti , Premium, Georgatte , gown, anarkali, kurti,dress Country of Origin : India`,
     image: 'https://images.meesho.com/images/products/331419465/e9zun_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/331419465/zwlre_512.webp',
     rating: { rate: 3.3, count: 4908 },
     size:['S','M','L','XL'],
     color:['white','green','pink','blue']
@@ -119,6 +126,7 @@ let products = [
     description: `new track pants suitable for workouts, gym, yoga, running, or casual wear. 
     They offer both style and comfort, so why wait? Grab yours now`,
     image: 'https://images.meesho.com/images/products/439203731/fv19v_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/187723498/ddnsm_512.webp',
     rating: { rate: 3.8, count: 6094 },
     size:['S','M','L','XL'],
     color:['white','green','pink','blue']
@@ -131,6 +139,7 @@ let products = [
     price: 170,
     description: `2 feet cute illustrious fabulous pre-eminent American Red Teddy Bear - 24 inch Country of Origin : India`,
     image: 'https://images.meesho.com/images/products/58102455/kdfho_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/58102455/mrcj2_512.webp',
     rating: { rate: 3.6, count: 7094 },
     size:['FreeSize'],
     color:['white','green','pink','blue','red']
@@ -143,6 +152,7 @@ let products = [
     price: 409,
     description: `COMFY STRECHABLE HIGH-WAIST (1-BUTTON) JEANS FOR WOMEN ANG GIRLS`,
     image: 'https://images.meesho.com/images/products/300640197/cq0df_400.webp',
+    
     rating: { rate: 4.8, count: 6084 },
     size:['S','M','L','XL'],
     color:['white','green','pink','blue','black']
@@ -155,6 +165,7 @@ let products = [
     price: 579,
     description: `Genuine Quality used in making of this shoes. Raspberry synthetic leather`,
     image: 'https://images.meesho.com/images/products/438286048/fpbyk_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/321793290/zjnhr_512.webp',
     rating: { rate: 4.5, count: 3089 },
     size:['7','8','9'],
     color:['black']
@@ -215,6 +226,7 @@ let products = [
     description: `Pure cotton kurta Fabric piece cotton kurta cotton fabric pure cotton piece pure cotton kapra 
     cotton blouse piece cotton blouse piece 2.5 meter Kurta Fabric piece`,
     image: 'https://images.meesho.com/images/products/292427153/wnxsc_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/292427153/u5cjq_512.webp',
     rating: { rate: 4.7, count: 3009 },
     size:['S','M','XL'],
     color:['black','blue','pink','yellow','green']
@@ -265,6 +277,7 @@ let products = [
     description: `|| New Colours Design T Shirt Men || New Look Fresh Colour Round
      Neck T Shirt || Partywear and Casual t`,
     image: 'https://images.meesho.com/images/products/390474112/ehlmo_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/436945024/swqwb_512.webp',
     rating: { rate: 4.0, count: 1089 },
     size:['S','M','L','XL'],
     color:['black','blue','green','yellow']
@@ -278,6 +291,7 @@ let products = [
     description: `latest new collection design saree designer bollywood fashion new arrival best top selling most order today deal offer sale sarees soft cotton linen chanderi
      banarasi kanchipuram mulmul mysore paper poly silk net georgette sana ikat art silk l kota`,
     image: 'https://images.meesho.com/images/products/240516683/0o6br_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/315439023/msj17_512.webp',
     rating: { rate: 4.2, count: 1089 },
     size:['FreeSize'],
     color:['black','blue','green']
@@ -408,6 +422,7 @@ let products = [
     description: `Introducing our Men's Polyester Printed Sports Vest, the ultimate choice for active individuals who demand both style and performance. Crafted from high-quality polyester material, this vest offers superior durability and comfort,
      making it ideal for intense workouts and sports activities`,
     image: 'https://images.meesho.com/images/products/407832579/fa8hx_400.webp',
+    imageSmall:'https://images.meesho.com/images/products/407815899/4k0rn_64.webp',
     rating: { rate: 3.2, count: 1089 },
     size:['S','M','L','XL'],
     color:['black','blue','green']
