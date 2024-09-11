@@ -29,7 +29,7 @@ function Navbar() {
 
 
 
-                        <div className="collapse navbar-collapse" style={{ marginLeft: "px" }} id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse"  id="navbarSupportedContent">
                             <ul className="navbar-nav   mb-lg-0 ">
 
                                 <li className="nav-item">
@@ -39,7 +39,7 @@ function Navbar() {
 
                                 <span class="vertical-line"></span>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to='https://supplier.meesho.com/'><h6>Become a Supplier</h6></Link>
+                                    <Link className="nav-link" to='https://supplier.meesho.com/'><h6>Become Supplier</h6></Link>
 
                                 </li>
                                 <span class="vertical-line"></span>

@@ -10,11 +10,11 @@ function Profile() {
 
     const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
-     const [responseMessage, setResponseMessage] = useState('');
+ 
 
      let handleSubmit = async (e) =>{
         e.preventDefault(); 
-console.log(654654);
+       console.log(654654);
 
         try {
             const response = await fetch('http://localhost:4000/api/users/login', {
@@ -89,7 +89,7 @@ console.log(654654);
                    
                         </div>
                     </form>
-                    {responseMessage && <p>{responseMessage}</p>}
+                    
 
                 </div>
 

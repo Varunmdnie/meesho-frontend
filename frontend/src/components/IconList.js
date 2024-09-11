@@ -15,7 +15,7 @@ const IconList = () => {
         <>
         <div className="d-flex pr-2">
             
-                <div style={{marginRight:"40px", color:"black"}}>
+                <div style={{color:"black"}} className="me-4">
                     
                     <ProfileDropdown/>
                  
@@ -25,17 +25,13 @@ const IconList = () => {
                 
 
                     <div className="d-flex">
-                    <h4 style={{color:"grey"}}>< BsCartPlusFill /></h4>
+                    <h4 style={{color:"grey"}} className="text-muted mb-0 ">< BsCartPlusFill /></h4>
                     <p className="text-primary p-1 btn-sm btn-warning rounded-pill ">{cartCounter}</p>
                     </div>
-
-                   
-                  
+   
                     <p>Cart </p>
                     
-                   
-                    
-               
+
             </Link>
             </div>
 

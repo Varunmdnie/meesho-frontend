@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { BsCartPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { AddToCart } from "../actions/CartActions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,7 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function ProductDetails({ product }) {
 
     let [selectedSize, setSelectedSize] = useState('')
-    let [selectedImage, setSelectedImage] = useState(product?.image); 
+    let [selectedImage, setSelectedImage] = useState(''); 
 
 
     let dispatch = useDispatch()
@@ -36,6 +36,11 @@ function ProductDetails({ product }) {
         setSelectedImage(image);  // Update the larger image
     };
 
+    useEffect(()=>{
+       setSelectedImage(product?.image)
+        
+    },[product?.image])
+
 
 
 
@@ -49,13 +54,13 @@ function ProductDetails({ product }) {
                 <div className="container">
                     <div className="row ">
 
-                        <div className="col-lg-1 mt-4">
+                        <div className="col-lg-1 col-md-2 col-sm-2 mt-4">
 
-                            <div className="card mb-3" style={{ width: "5rem" }} onClick={() => handleImageClick(product?.image)}>
+                            <div className="card mb-3"  onClick={() => handleImageClick(product?.image)}>
                                 <img className="card-img img-fluid" src={product?.image} alt="" id="product-detail" />
                             </div>
 
-                            <div className="card mb-3" style={{ width: "5rem" }} onClick={() => handleImageClick(product?.imageSmall)}>
+                            <div className="card mb-3"  onClick={() => handleImageClick(product?.imageSmall)}>
                                 <img className="card-img img-fluid" src={product?.imageSmall} alt="" id="product-detail" />
                             </div>
                            
@@ -63,9 +68,9 @@ function ProductDetails({ product }) {
                         </div>
 
 
-                        <div className="col-lg-5 mt-4">
+                        <div className="col-lg-5 col-md-9 col-sm-12 mt-4">
 
-                            <div className="card mb-3" style={{ width: "30rem" }}>
+                            <div className="card mb-3" >
                                 <img className="card-img img-fluid" src={selectedImage} alt="" id="product-detail" />
                             </div>
                             <div className=" d-flex justify-content-between   " style={{ width: "92%" }}>
@@ -77,8 +82,8 @@ function ProductDetails({ product }) {
 
 
 
-                        <div className="col-lg-6 mt-4 ">
-                            <div className="card" style={{ width: "40rem" }}>
+                        <div className="col-lg-6 col-md-9 col-sm-12 mt-4 ">
+                            <div className="card" >
                                 <div class="card-body">
                                     <h5 className="card-title text-muted">{product.title}</h5>
                                     <h4>₹{product.price}</h4>
@@ -91,7 +96,7 @@ function ProductDetails({ product }) {
                                 </div>
                             </div>
 
-                            <div className="card mt-4" style={{ width: "40rem" }}>
+                            <div className="card mt-4" >
                                 <div class="card-body">
                                     <h3 className="card-title">Select Size</h3>
 
@@ -104,7 +109,7 @@ function ProductDetails({ product }) {
                                 </div>
                             </div>
 
-                            <div className="card mt-4" style={{ width: "40rem" }}>
+                            <div className="card mt-4" >
                                 <div class="card-body">
                                     <h3 className="card-title">Product Details</h3>
                                     <p className="card-text text-muted">{product.description}</p>

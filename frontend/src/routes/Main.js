@@ -28,6 +28,7 @@ import SignUp from '../pages/SignUp';
 import Cart from '../pages/Cart';
 import Payment from '../pages/Payment';
 import Orders from '../pages/Orders';
+import Seller from '../pages/Seller';
 
 
 
@@ -72,6 +73,7 @@ function Main() {
                         <Route path='/cart' element={<Cart />} />
                         <Route path='/payment' element={<Payment />} />
                         <Route path='/orders' element={<Orders />} />
+                        <Route path='/seller' element={<Seller />} />
 
 
 

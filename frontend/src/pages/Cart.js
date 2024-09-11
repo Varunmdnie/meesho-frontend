@@ -11,7 +11,7 @@ import SetCurrentProduct from "../actions/SetCurrentProduct";
 
 
 
-function Cart(){
+function Cart() {
 
     const cartItems = useSelector(state => state.cart.cartItems);
     const cartCounter = useSelector(state => state.cart.cartCounter);
@@ -23,99 +23,113 @@ function Cart(){
 
     let dispatch = useDispatch()
 
-    let handleRemove = (id) =>{
+    let handleRemove = (id) => {
         dispatch(RemoveFromCart(id))
     }
 
     const handleIncrement = (id) => {
         dispatch(IncrementQuantity(id));
-      };
-    
-      const handleDecrement = (id) => {
-        dispatch(DecrementQuantity(id));
-      };
+    };
 
-      const handleImageClick = (product) =>{
+    const handleDecrement = (id) => {
+        dispatch(DecrementQuantity(id));
+    };
+
+    const handleImageClick = (product) => {
         dispatch(SetCurrentProduct(product))
         navigate(`/details/${product.id}`)
-      }
+    }
 
 
 
-    return(
+    return (
 
         <>
-        <Navbar />
-             <div className="container bg-white ">
-                
+            <Navbar />
+            <div className="container bg-white ">
+
                 {cartItems.length ?
                     <div className='row'>
                         <h3 className='text center p-0 py-4 mb-4 mt-3'>Product Details</h3>
 
-                   
-                        <div className="col-md-8 border">
-
-                            
-                            <div className="row border-bottom py-3">
-                                <div className='col-md-5'> <h5 className=""> Product</h5>
+                        <div className=" col-md-8 container border p-3">
+                            {/* Header Row */}
+                            <div className="row border-bottom py-3 d-none d-md-flex">
+                                <div className="col-md-5">
+                                    <h5>Product</h5>
                                 </div>
-                                <div className='col-md-2'> <h5 className=" text-center"> </h5>
+                                <div className="col-md-2">
+                                    <h5 className="text-center">Remove</h5>
                                 </div>
-                                <div className='col-md-1'> <h5 className="text-center">Size</h5>
+                                <div className="col-md-1">
+                                    <h5 className="text-center">Size</h5>
                                 </div>
-                                <div className='col-md-1'><h5 className="text-center"> Price</h5>
+                                <div className="col-md-1">
+                                    <h5 className="text-center">Price</h5>
                                 </div>
-                                <div className='col-md-2'><h5 className="text-center">Qty</h5>
+                                <div className="col-md-2">
+                                    <h5 className="text-center">Qty</h5>
                                 </div>
-                                <div className='col-md-1'> <h5 className="text-center">Total</h5>
+                                <div className="col-md-1">
+                                    <h5 className="text-center">Total</h5>
                                 </div>
                             </div>
 
-
-
-
-                            <div className="container border-right p-0">
+                            {/* Cart Items */}
+                            <div className="container p-0">
                                 {cartItems.map(item => (
-                                    
-                                 
-                                    <div className="row py-4" key={item.id}>
-                                        <div className='col-md-5 d-flex'>
-                                            <img  src={item.image} alt={item.title} style={{ width: "80px", height: "80px" }} onClick={() => handleImageClick(item)} />
-                                            <h6 className='ps-3'>{item.title}</h6>
+                                    <div className="row py-3 align-items-center border-bottom" key={item.id}>
+                                        {/* Product Image and Title */}
+                                        <div className="col-12 col-md-5 d-flex align-items-center mb-2 mb-md-0">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                style={{ width: "80px", height: "80px" }}
+                                                onClick={() => handleImageClick(item)}
+                                            />
+                                            <h6 className="ps-3">{item.title}</h6>
                                         </div>
-                                        <div className='col-md-2'>
-                                            <Link onClick={() => handleRemove(item.id)} className='text-end btn btn-primary btn-sm'>remove</Link>
+
+                                        {/* Remove Button (Stacks for small screens) */}
+                                        <div className="col-6 col-md-2 mb-2 mb-md-0 text-md-center">
+                                            <Link
+                                                onClick={() => handleRemove(item.id)}
+                                                className="btn btn-danger btn-sm"
+                                            >
+                                                Remove
+                                            </Link>
                                         </div>
-                                        <div className='col-md-1'>
-                                            <p className='text-center'>{item.selectedSize || item.size[0]}</p>
+
+                                        {/* Size */}
+                                        <div className="col-6 col-md-1 text-center mb-2 mb-md-0">
+                                            <p>{item.selectedSize || item.size[0]}</p>
                                         </div>
-                                        <div className='col-md-1'>
-                                            <p className='text-center'>
-                                                {item.price}
-                                                </p>
+
+                                        {/* Price */}
+                                        <div className="col-6 col-md-1 text-center mb-2 mb-md-0">
+                                            <p>{item.price}</p>
                                         </div>
-                                        
-                                        <div className='col-md-2'>
-                                        <div className=" text-center">
-                                        <button className="" onClick={() => handleIncrement(item.id)}>+</button>
-                                        <button className='text-center'>{item.quantity}</button>
-                                        <button onClick={() => handleDecrement(item.id)}>-</button>
-                                        </div> 
-                                           
+
+                                        {/* Quantity Controls */}
+                                        <div className="col-6 col-md-2 text-center mb-2 mb-md-0">
+                                            <div className="d-flex justify-content-center">
+                                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleIncrement(item.id)}>+</button>
+                                                <span className="mx-2">{item.quantity}</span>
+                                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDecrement(item.id)}>-</button>
+                                            </div>
                                         </div>
-                                        <div className='col-md-1'>
-                                            <p className='text-center'>{item.total_item_price.toFixed(2)}</p>
+
+                                  
+                                        <div className="col-6 col-md-1 text-center">
+                                            <p>{item.total_item_price.toFixed(2)}</p>
                                         </div>
-                                      
                                     </div>
                                 ))}
-                                <hr/>
-                              
                             </div>
                         </div>
 
-                       
-                        
+
+
 
 
 
@@ -128,17 +142,17 @@ function Cart(){
                                 <div className='d-flex justify-content-between px-2 m-3'>
                                     <h5>Total Product Price</h5> <h5>₹{totalPrice.toFixed(2)}</h5>
                                 </div>
-                               
+
                                 <div className='d-flex justify-content-between px-2 m-3'>
                                     <h5> Delivery Charges </h5> <h5> ₹{deliveryCharges.toFixed(2)} </h5>
                                 </div>
-                               
-                        
-                                <hr/>
+
+
+                                <hr />
                                 <div className='d-flex justify-content-between px-2 m-3'>
                                     <h5> Order Total </h5> <h5>₹{grandTotal.toFixed(2)}</h5>
                                 </div>
-                                <hr/>
+                                <hr />
                                 <Link className='float-end btn btn-success' to='/payment'>Continue</Link>
                             </div>
                         </div>

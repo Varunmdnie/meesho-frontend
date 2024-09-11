@@ -20,6 +20,7 @@ function ProfileDropdown() {
                     <Link to="/profile">Login</Link>
                     <Link to="/signup">Sign Up</Link>
                     <Link to="/orders">My Orders</Link>
+                    <Link to="/seller">seller</Link>
                 </div>
             </div>
 
