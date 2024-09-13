@@ -1,5 +1,5 @@
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import ProfileNav from "../components/ProfileNav"
 import Footer from "../components/Footer"
 import { useState } from "react";
@@ -9,13 +9,11 @@ import { toast, ToastContainer } from "react-toastify";
 function Profile() {
 
     const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
- 
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate()
 
      let handleSubmit = async (e) =>{
         e.preventDefault(); 
-       console.log(654654);
-
         try {
             const response = await fetch('http://localhost:4000/api/users/login', {
               method: 'POST',
@@ -29,15 +27,31 @@ function Profile() {
             });
       
             const data = await response.json();
-      
-            // Handle successful or failed login attempt
-            if (data.success) {
+           
+            if (data.status === 'success') {
+                localStorage.setItem('loggedInUser', JSON.stringify(data.user))
                 toast.success('Login Successful!');
+                setTimeout(() => {
+                    switch(data.user.usertype) {
+                        case 'customer':
+                            navigate('/');
+                            break;
+                        case 'admin':
+                            navigate('/admin');
+                            break;
+                        case 'seller':
+                            navigate('/seller');
+                            break;
+                        default:
+                            break;
+                    }
+                }, 1000);
             } else {
-              toast.error(data.message); // Display error message
+              toast.error(data.message); 
             }
           } catch (error) {
             console.error('Error logging in:', error);
+            toast.error('Error logging in. Please try again.');
           }
 
      }
@@ -81,7 +95,7 @@ function Profile() {
                         </div>
 
 
-                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4" onClick={handleSubmit}>Sign in</button>
+                        <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-block mb-4" >Sign in</button>
 
 
                         <div className="text-center">

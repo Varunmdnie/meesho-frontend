@@ -1,10 +1,10 @@
 let mongoose = require('mongoose')
 
 let productSchema = new mongoose.Schema({
-    productId:{
-        type:Number,
-        required:true
-    },
+    // productId:{
+    //     type:Number,
+    //     required:true
+    // },
     title:{
         type:String,
         required:true
@@ -45,7 +45,11 @@ let productSchema = new mongoose.Schema({
          type: [String],
           required: false 
         },
-
+    seller_id: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    }
+    
 
 
 })
