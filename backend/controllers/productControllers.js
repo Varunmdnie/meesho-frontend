@@ -38,12 +38,10 @@ let getProductsOfSeller = async (req,res) =>{
         res.json({success:true,products})
 
     }
-    catch{
-        console.log(error)
-        res.json({success:false,message:error.message})
-
-
-    }
+  catch(err) {  // Changed 'error' to 'err'
+    console.error(err);  // Optional: Log the error for debugging purposes
+    res.status(500).json({ message: err.message });  // Ensure 'err' is correctly referenced
+  }
 }
 
 module.exports = {addProducts,getProducts, getProductsOfSeller}

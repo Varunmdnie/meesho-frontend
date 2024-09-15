@@ -1,10 +1,16 @@
 import Navbar from "../components/Navbar"
 import ProductItem from "../components/ProductItem"
-import products from "../data"
+import { useState,useEffect } from "react"
 
 function Kurtas(){
 
-    let kurtas = products.filter((el) =>el.subCategory === 'kurtis')
+    let [productsList, setProductsList] = useState([])
+    useEffect(() =>{
+        fetch('http://localhost:4000/api/products/getProducts').then((res) => res.json())
+        .then((data) => setProductsList(data.products)).catch((err) => console.log(err))
+    },[])
+
+    let kurtas = productsList.filter((el) =>el.subCategory === 'kurtis')
     return(
         <>
         <Navbar/>

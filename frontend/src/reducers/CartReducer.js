@@ -12,7 +12,7 @@ const initialState = JSON.parse(localStorage.getItem("cart")) || {
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART: {
-      const existingItemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+      const existingItemIndex = state.cartItems.findIndex(item => item._id === action.payload._id);
 
       let updatedCartItems;
       let updatedTotalPrice;
@@ -50,11 +50,11 @@ const CartReducer = (state = initialState, action) => {
     }
 
     case REMOVE_FROM_CART: {
-      const removedItem = state.cartItems.find(item => item.id === action.payload);
+      const removedItem = state.cartItems.find(item => item._id === action.payload);
       if (!removedItem) return state;
 
 
-      const updatedCartItems = state.cartItems.filter(item => item.id !== action.payload);
+      const updatedCartItems = state.cartItems.filter(item => item._id !== action.payload);
 
 
       const updatedTotalPrice = state.totalPrice - (removedItem.price * removedItem.quantity);
@@ -77,14 +77,14 @@ const CartReducer = (state = initialState, action) => {
 
     case 'INCREMENT_QUANTITY': {
       const updatedCartItems = state.cartItems.map(item => {
-        if (item.id === action.payload) {
+        if (item._id === action.payload) {
           const updatedQuantity = item.quantity + 1;
           return { ...item, quantity: updatedQuantity, total_item_price: updatedQuantity * item.price };
         }
         return item;
       });
 
-      const updatedTotalPrice = state.totalPrice + state.cartItems.find(item => item.id === action.payload).price;
+      const updatedTotalPrice = state.totalPrice + state.cartItems.find(item => item._id === action.payload).price;
       const updatedGrandTotal = updatedTotalPrice + state.deliveryCharges;
 
       const updatedState = {
@@ -102,14 +102,14 @@ const CartReducer = (state = initialState, action) => {
 
     case 'DECREMENT_QUANTITY': {
       const updatedCartItems = state.cartItems.map(item => {
-        if (item.id === action.payload && item.quantity > 1) {
+        if (item._id === action.payload && item.quantity > 1) {
           const updatedQuantity = item.quantity - 1;
           return { ...item, quantity: updatedQuantity, total_item_price: updatedQuantity * item.price };
         }
         return item;
       });
 
-      const removedItem = state.cartItems.find(item => item.id === action.payload);
+      const removedItem = state.cartItems.find(item => item._id === action.payload);
       if (removedItem.quantity === 1) return state; // Prevent quantity from going below 1
 
       const updatedTotalPrice = state.totalPrice - removedItem.price;

@@ -1,11 +1,9 @@
 import { useSelector } from "react-redux"
 import ProductDetails from "../components/ProductDetails"
 import Navbar from "../components/Navbar"
-import { Skeleton } from "@mui/material"
 
 import { useEffect } from "react"
 import { useState } from "react"
-import products from "../data"
 
 import { useDispatch } from "react-redux"
 import SetCurrentProduct from "../actions/SetCurrentProduct"
@@ -23,8 +21,15 @@ function Details() {
    
     let [productsToShow, setProductsToShow] = useState([]);
 
-
+    let [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true);
+   
+
+    useEffect(() => {
+        fetch('http://localhost:4000/api/products/getProducts').then((res) => res.json())
+        .then((productsList) => setProducts(productsList.products)).catch((err) => console.log(err))
+        
+    },[])
 
     useEffect(() => {
       
@@ -33,8 +38,9 @@ function Details() {
             setLoading(false);
         }, 400); 
 
-        setProductsToShow(products.filter((item)=> item.category === product.category && item.id !== product.id))
-    }, [loading, product.id, product.category]);
+
+        setProductsToShow(products.filter((item)=> item.category === product.category && item._id !== product._id))
+    }, [loading, product._id, product.category]);
 
     
     let dispatch = useDispatch()
@@ -52,11 +58,8 @@ function Details() {
 
             <Navbar />
 
-            {loading ? (
-                <Skeleton sx={{ margin: '100px', mt: '500px', mr: '15px' }} variant="text" width={500} height={500} />
-            ) : (
-                <ProductDetails product={product} />
-            )}
+           
+            <ProductDetails product={product} />
 
             <div className="container mt-5 text-muted ">
                 <h2 style={{ marginLeft: "3%" }}>People also viewed</h2>
@@ -73,7 +76,7 @@ function Details() {
                             
 
                                 <div className="card" style={{ width: "13rem" }} >
-                                    <img height={"280px"} src={el.image} className="card-img-top" alt={el.title} />
+                                    <img height={"280px"} src={el.images[0]} className="card-img-top" alt={el.title} />
 
                                     <div className="card-body">
                                         <h6 className="card-title text-muted">{el.title}</h6>
@@ -85,8 +88,8 @@ function Details() {
                                         <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6>
                                         <br />
                                         <div className="d-flex">
-                                            <p className="card-text btn btn-success btn-sm rounded-pill me-2">{el.rating.rate}✩</p>
-                                            <p><sub className="text-muted">{product.rating.count} Reviews</sub></p>
+                                            <p className="card-text btn btn-success btn-sm rounded-pill me-2">{el.rating}✩</p>
+                                            <p><sub className="text-muted">{el.count} Reviews</sub></p>
 
                                         </div>
 

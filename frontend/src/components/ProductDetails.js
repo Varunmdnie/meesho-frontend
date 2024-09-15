@@ -3,8 +3,8 @@ import { BsCartPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { AddToCart } from "../actions/CartActions";
 import { useEffect, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {  toast } from 'react-toastify';
+ import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -37,33 +37,33 @@ function ProductDetails({ product }) {
     };
 
     useEffect(()=>{
-       setSelectedImage(product?.image)
+       setSelectedImage(product?.images[0])
         
-    },[product?.image])
+    },[product?.images[0]])
 
 
 
 
     return (
         <>
-            <ToastContainer
+            {/* <ToastContainer
                 position="top-right"
                 autoClose='2000'
-            />
+            /> */}
             <section className="bg-light ">
                 <div className="container">
                     <div className="row ">
 
                         <div className="col-lg-1 col-md-2 col-sm-2 mt-4">
 
-                            <div className="card mb-3"  onClick={() => handleImageClick(product?.image)}>
-                                <img className="card-img img-fluid" src={product?.image} alt="" id="product-detail" />
+                            <div className="card mb-3"  onClick={() => handleImageClick(product?.images[0])}>
+                                <img className="card-img img-fluid" src={product?.images[0]} alt="" id="product-detail" />
                             </div>
 
-                            <div className="card mb-3"  onClick={() => handleImageClick(product?.imageSmall)}>
-                                <img className="card-img img-fluid" src={product?.imageSmall} alt="" id="product-detail" />
+                            <div className="card mb-3"  onClick={() => handleImageClick(product?.images[1])}>
+                                <img className="card-img img-fluid" src={product?.images[1]} alt="" id="product-detail" />
                             </div>
-                           
+                            
 
                         </div>
 
@@ -89,8 +89,8 @@ function ProductDetails({ product }) {
                                     <h4>₹{product.price}</h4>
 
                                     <div className="d-flex">
-                                        <p className="card-text btn btn-secondary btn-sm rounded-pill me-2">{product.rating.rate}✩</p>
-                                        <p><sub className="text-muted">{product.rating.count} Reviews</sub></p>
+                                        <p className="card-text btn btn-secondary btn-sm rounded-pill me-2">{product.rating}✩</p>
+                                        <p><sub className="text-muted">{product.rating} Reviews</sub></p>
                                     </div>
                                     <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6>
                                 </div>
@@ -100,7 +100,7 @@ function ProductDetails({ product }) {
                                 <div class="card-body">
                                     <h3 className="card-title">Select Size</h3>
 
-                                    {product.size.map((el, i) => (
+                                    {product.sizes.map((el, i) => (
                                         <span key={i} class="btn btn-outline-secondary rounded m-2" onClick={() => handleSizeSelection(el)}>{el}</span>
 
                                     ))}

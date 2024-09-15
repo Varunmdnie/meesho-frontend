@@ -18,9 +18,9 @@ function Orders() {
                     {cartItems.map(item => (
 
 
-                        <div className="row border py-4" key={item.id}>
+                        <div className="row border py-4" key={item._id}>
                             <div className='col-md-5 d-flex'>
-                                <img src={item.image} alt={item.title} style={{ width: "80px", height: "80px" }} />
+                                <img src={item.images[0]} alt={item.title} style={{ width: "80px", height: "80px" }} />
                                 <div>
                                 <h6 className='ps-3'>{item.title}</h6>
                                 <h4 className='ms-5 btn-light btn'>quantity : {item.quantity}</h4>

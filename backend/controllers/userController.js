@@ -46,4 +46,13 @@ let login = async (req, res) => {
     }
 }
 
-module.exports = { login, register }
+let logout = async (req,res) =>{
+    res.json({ status:'success', message: 'Logged out successfully' });
+}
+
+let cart = async (req,res) =>{
+    res.json(req.user)
+}
+
+module.exports = { login, register,logout,cart }
+

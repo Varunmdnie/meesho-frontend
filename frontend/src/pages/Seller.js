@@ -1,14 +1,20 @@
 
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Footer from "../components/Footer"
 
 import SellerNavbar from "../components/SellerNavbar";
 import { useEffect, useState } from "react";
 
 function Seller() {
+    // let navigate = useNavigate()
 
     let [data, setData] = useState([])
     useEffect(() => {
+        // let loggedInUser=localStorage.getItem('loggedInUser')  
+        // if(!loggedInUser)         {
+           
+        //     navigate('/')
+        // }      
         fetch('http://localhost:4000/api/products/getProductsOfSeller', {
             method:'POST',
             headers:{

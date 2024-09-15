@@ -37,7 +37,7 @@ function Cart() {
 
     const handleImageClick = (product) => {
         dispatch(SetCurrentProduct(product))
-        navigate(`/details/${product.id}`)
+        navigate(`/details/${product._id}`)
     }
 
 
@@ -78,11 +78,11 @@ function Cart() {
                             {/* Cart Items */}
                             <div className="container p-0">
                                 {cartItems.map(item => (
-                                    <div className="row py-3 align-items-center border-bottom" key={item.id}>
+                                    <div className="row py-3 align-items-center border-bottom" key={item._id}>
                                         {/* Product Image and Title */}
                                         <div className="col-12 col-md-5 d-flex align-items-center mb-2 mb-md-0">
                                             <img
-                                                src={item.image}
+                                                src={item.images[0]}
                                                 alt={item.title}
                                                 style={{ width: "80px", height: "80px" }}
                                                 onClick={() => handleImageClick(item)}
@@ -93,7 +93,7 @@ function Cart() {
                                         {/* Remove Button (Stacks for small screens) */}
                                         <div className="col-6 col-md-2 mb-2 mb-md-0 text-md-center">
                                             <Link
-                                                onClick={() => handleRemove(item.id)}
+                                                onClick={() => handleRemove(item._id)}
                                                 className="btn btn-danger btn-sm"
                                             >
                                                 Remove
@@ -113,9 +113,9 @@ function Cart() {
                                         {/* Quantity Controls */}
                                         <div className="col-6 col-md-2 text-center mb-2 mb-md-0">
                                             <div className="d-flex justify-content-center">
-                                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleIncrement(item.id)}>+</button>
+                                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleIncrement(item._id)}>+</button>
                                                 <span className="mx-2">{item.quantity}</span>
-                                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDecrement(item.id)}>-</button>
+                                                <button className="btn btn-outline-secondary btn-sm" onClick={() => handleDecrement(item._id)}>-</button>
                                             </div>
                                         </div>
 

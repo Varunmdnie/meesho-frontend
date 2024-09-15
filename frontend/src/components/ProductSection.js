@@ -1,17 +1,21 @@
 
 import { useEffect, useState } from "react"
-import products from "../data"
+
 import ProductItem from "./ProductItem"
 import Sidebar from "./Sidebar"
 import { search$ } from '../state'
 function ProductSection() {
-    let [productsList, setProductsList] = useState(products)
+    let [productsList, setProductsList] = useState([])
+    let [products, setProducts] = useState([])
 
-    useEffect(()=>{
+    useEffect(() =>{
+        fetch('http://localhost:4000/api/products/getProducts').then((res) => res.json())
+        .then((productsList) => {setProducts(productsList.products); setProductsList(productsList.products)}).catch((err) => console.log(err))
+
         search$.subscribe(searchTerm=>{
-            setProductsList(products.filter((item) => (item.title.toLowerCase()).includes(searchTerm.toLowerCase())))
+            if(!searchTerm) return
+            setProductsList(productsList.filter((item) => (item.title.toLowerCase()).includes(searchTerm.toLowerCase())))
         });
-        
     },[])
 
     const filterProducts = (action) => {
@@ -27,7 +31,7 @@ function ProductSection() {
                 setProductsList(products.sort((a, b) => b.price - a.price).filter(a => a))
                 break;
             case 'rating':
-                setProductsList(products.filter((item) => item.rating.rate >= action.data))
+                setProductsList(products.filter((item) => item.rating >= action.data))
                 break;
 
 
@@ -56,6 +60,7 @@ function ProductSection() {
 
 
                     <section className="col-md-9">
+                            {/* {productsList.length} */}
                         <div className="row">
                             {
                                 productsList.map((product, index) => (

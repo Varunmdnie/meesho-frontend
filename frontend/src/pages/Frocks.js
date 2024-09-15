@@ -1,9 +1,14 @@
 import Navbar from "../components/Navbar"
-import products from "../data"
+import { useState,useEffect } from "react"
 import ProductItem from "../components/ProductItem"
 
 function Frocks(){
-    let frocks = products.filter((el) =>el.subCategory === 'frock')
+    let [productsList, setProductsList] = useState([])
+    useEffect(() =>{
+        fetch('http://localhost:4000/api/products/getProducts').then((res) => res.json())
+        .then((data) => setProductsList(data.products)).catch((err) => console.log(err))
+    },[])
+    let frocks = productsList.filter((el) =>el.subCategory === 'frocks')
    
         
     return(
