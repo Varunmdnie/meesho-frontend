@@ -66,7 +66,7 @@ function ProfileNav() {
                                 </div>
 
                                 <div className="dropdown-content">
-                                    <Link to="/profile">Login</Link>
+                                    <Link to="/login">Login</Link>
                                     <Link to="/signup">Sign Up</Link>
                                     <Link to="/seller">Seller</Link>
                                 </div>

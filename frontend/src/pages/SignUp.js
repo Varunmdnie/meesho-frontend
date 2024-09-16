@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Footer from "../components/Footer"
 import ProfileNav from "../components/ProfileNav"
 import { ToastContainer, toast } from "react-toastify";
@@ -14,6 +14,11 @@ function SignUp() {
     const [phoneNumber, setPhoneNumber] = useState();
 
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        localStorage.clear()
+    },[])
+
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,7 +47,7 @@ function SignUp() {
 
                 toast.success('Registration Successful!');
                 setTimeout(() => {
-                    navigate("/profile")
+                    navigate("/login")
                 }, 1000);
 
             } else {

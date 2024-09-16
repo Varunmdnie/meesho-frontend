@@ -26,7 +26,7 @@ const IconList = () => {
 
                     <div className="d-flex">
                     <h4 style={{color:"grey"}} className="text-muted mb-0 ">< BsCartPlusFill /></h4>
-                    <p className="text-primary p-1 btn-sm btn-warning rounded-pill ">{cartCounter}</p>
+                    {cartCounter ? <p className="text-primary p-1 btn-sm btn-warning rounded-pill ">{cartCounter}</p>: null}
                     </div>
    
                     <p>Cart </p>

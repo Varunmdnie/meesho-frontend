@@ -1,50 +1,153 @@
 import { useSelector } from "react-redux";
-import React from "react";
+import {React, useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useDispatch } from "react-redux";
-import { RemoveFromCart } from "../actions/CartActions";
-import { IncrementQuantity } from "../actions/CartActions";
-import { DecrementQuantity } from "../actions/CartActions";
+import {  IncrementQuantity, DecrementQuantity, updateCartCount } from "../actions/CartActions";
 import SetCurrentProduct from "../actions/SetCurrentProduct";
+import {  toast, ToastContainer } from 'react-toastify';
 
 
 
 
 function Cart() {
 
-    const cartItems = useSelector(state => state.cart.cartItems);
-    const cartCounter = useSelector(state => state.cart.cartCounter);
-    const totalPrice = useSelector(state => state.cart.totalPrice);
-    const deliveryCharges = useSelector(state => state.cart.deliveryCharges);
+    const [cartItems, setCartItems] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [deliveryCharges, setDeliveryCharges] = useState(50);
     const grandTotal = useSelector(state => state.cart.grandTotal);
 
     let navigate = useNavigate()
 
     let dispatch = useDispatch()
 
-    let handleRemove = (id) => {
-        dispatch(RemoveFromCart(id))
+    let handleRemove = (id, size) => {
+        // dispatch(RemoveFromCart(id))
+
+        fetch('http://localhost:4000/api/cart/removeFromCart',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId:JSON.parse(localStorage.getItem('loggedInUser'))._id,
+                productId: id,
+                size: size
+            })
+        }).then((res) => res.json())
+        .then((data) => {
+            if(data.status === 'success'){
+                setCartItems(data.cart.items);
+                setTotalPrice(data.cart.totalPrice);
+                dispatch(updateCartCount(data.cart.items.length))
+                toast.success('Item removed from cart')
+            }else{
+                toast.error(data.message)
+            }
+        }).catch((err) => console.log(err))
     }
 
     const handleIncrement = (id) => {
-        dispatch(IncrementQuantity(id));
+        // dispatch(IncrementQuantity(id));
+        fetch('http://localhost:4000/api/cart/incrementItem',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId:JSON.parse(localStorage.getItem('loggedInUser'))._id,
+                productId: id,
+                // size: size
+            })
+        }).then((res) => res.json())
+        .then((data) => {
+            if(data.status === 'success'){
+                setCartItems(data.cart.items);
+                setTotalPrice(data.cart.totalPrice);
+                dispatch(updateCartCount(data.cart.items.length))
+                toast.success('quantity increased')
+            }else{
+                toast.error(data.message)
+            }
+        }).catch((err) => console.log(err))
     };
 
     const handleDecrement = (id) => {
-        dispatch(DecrementQuantity(id));
+        // dispatch(DecrementQuantity(id));
+        fetch('http://localhost:4000/api/cart/decrementItem',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId:JSON.parse(localStorage.getItem('loggedInUser'))._id,
+                productId: id,
+                // size: size
+            })
+        }).then((res) => res.json())
+        .then((data) => {
+            if(data.status === 'success'){
+                setCartItems(data.cart.items);
+                setTotalPrice(data.cart.totalPrice);
+                dispatch(updateCartCount(data.cart.items.length))
+                toast.success('quantity decreased')
+            }else{
+                toast.error(data.message)
+            }
+        }).catch((err) => console.log(err))
     };
 
-    const handleImageClick = (product) => {
-        dispatch(SetCurrentProduct(product))
-        navigate(`/details/${product._id}`)
+    const handleImageClick = async (product) => {
+        fetch('http://localhost:4000/api/products/getProductById',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                productId: product.productId,
+            })
+        }).then(res=> res.json()).then((data) => {
+            if(data.success){
+                dispatch(SetCurrentProduct(data.product))
+                navigate(`/details/${product._id}`)
+            }else{
+                toast.error(data.message)
+            }
+        })
+
     }
+    
+
+    //fetching data backend to frontend
+    useEffect(() =>{
+        fetch('http://localhost:4000/api/cart/fetchCart',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId:JSON.parse(localStorage.getItem('loggedInUser'))._id
+            })
+        }).then((res) => res.json())
+        .then((data) => {
+            if(data.status === 'success'){
+                setCartItems(data.cart.items);
+                setTotalPrice(data.cart.totalPrice);
+                dispatch(updateCartCount(data.cart.items.length))
+            }else{
+                toast.error(data.message)
+            }
+        }).catch((err) => console.log(err))
+
+       
+    },[])
 
 
 
     return (
 
         <>
+        {/* <ToastContainer autoClose='2000' position="top-right" /> */}
             <Navbar />
             <div className="container bg-white ">
 
@@ -82,7 +185,7 @@ function Cart() {
                                         {/* Product Image and Title */}
                                         <div className="col-12 col-md-5 d-flex align-items-center mb-2 mb-md-0">
                                             <img
-                                                src={item.images[0]}
+                                                src={item.details.image}
                                                 alt={item.title}
                                                 style={{ width: "80px", height: "80px" }}
                                                 onClick={() => handleImageClick(item)}
@@ -93,7 +196,7 @@ function Cart() {
                                         {/* Remove Button (Stacks for small screens) */}
                                         <div className="col-6 col-md-2 mb-2 mb-md-0 text-md-center">
                                             <Link
-                                                onClick={() => handleRemove(item._id)}
+                                                onClick={() => handleRemove(item._id, item.size )}
                                                 className="btn btn-danger btn-sm"
                                             >
                                                 Remove
@@ -102,7 +205,7 @@ function Cart() {
 
                                         {/* Size */}
                                         <div className="col-6 col-md-1 text-center mb-2 mb-md-0">
-                                            <p>{item.selectedSize || item.size[0]}</p>
+                                            <p>{item.size}</p>
                                         </div>
 
                                         {/* Price */}
@@ -121,7 +224,7 @@ function Cart() {
 
                                   
                                         <div className="col-6 col-md-1 text-center">
-                                            <p>{item.total_item_price.toFixed(2)}</p>
+                                            <p>{(item.price*item.quantity).toFixed(2)}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -137,7 +240,7 @@ function Cart() {
 
 
                         <div className='col-md-4'>
-                            <h4 className="mb-4 text-center">Price Details ({cartCounter} items)</h4>
+                            <h4 className="mb-4 text-center">Price Details ({cartItems.length} items)</h4>
                             <div className=' border p-2 mx-2 pb-5'>
                                 <div className='d-flex justify-content-between px-2 m-3'>
                                     <h5>Total Product Price</h5> <h5>₹{totalPrice.toFixed(2)}</h5>
@@ -150,7 +253,7 @@ function Cart() {
 
                                 <hr />
                                 <div className='d-flex justify-content-between px-2 m-3'>
-                                    <h5> Order Total </h5> <h5>₹{grandTotal.toFixed(2)}</h5>
+                                    <h5> Order Total </h5> <h5>₹{(totalPrice+deliveryCharges).toFixed(2)}</h5>
                                 </div>
                                 <hr />
                                 <Link className='float-end btn btn-success' to='/payment'>Continue</Link>

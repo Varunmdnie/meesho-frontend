@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { BsCartPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { AddToCart } from "../actions/CartActions";
+import { AddToCart, updateCartCount } from "../actions/CartActions";
 import { useEffect, useState } from "react";
 import {  toast } from 'react-toastify';
  import 'react-toastify/dist/ReactToastify.css';
@@ -17,15 +17,46 @@ function ProductDetails({ product }) {
 
 
     let dispatch = useDispatch()
+    let navigate = useNavigate()
 
-    let handleCartClick = () => {
+    let handleCartClick = async () => {
+
         if (!selectedSize) {
             toast.error('Please select a size before adding to the cart.');
             return;
         }
 
-        dispatch(AddToCart({ ...product, selectedSize }));
-        toast.success('Product added to cart')
+        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
+        if(loggedInUser){
+
+             // dispatch(AddToCart({ ...product, selectedSize }));
+        fetch('http://localhost:4000/api/cart/cartAdd',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId: loggedInUser._id,
+                productId: product._id,
+                quantity:1,
+                size:selectedSize,
+                product,
+                price:product.price
+            })
+        }).then(res=> res.json()).then((data) => {
+            if(data.status === 'success'){
+                toast.success(data.message)
+                dispatch(updateCartCount(data.cart.items.length))
+            }else{
+                toast.error(data.message)
+            }
+        })
+
+        }else{
+            navigate('/login')
+        }
+
+       
     }
 
     let handleSizeSelection = (size) => {
@@ -40,8 +71,6 @@ function ProductDetails({ product }) {
        setSelectedImage(product?.images[0])
         
     },[product?.images[0]])
-
-
 
 
     return (
@@ -74,13 +103,12 @@ function ProductDetails({ product }) {
                                 <img className="card-img img-fluid" src={selectedImage} alt="" id="product-detail" />
                             </div>
                             <div className=" d-flex justify-content-between   " style={{ width: "92%" }}>
-                                <Link className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-50" onClick={handleCartClick} to="#">< BsCartPlusFill /> Add to Cart</Link>
+
+                                <button className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-50" onClick={handleCartClick} >< BsCartPlusFill /> Add to Cart</button>
                                 <Link className="text-decoration-none text-light btn btn-primary btn-lg w-50 m-1" onClick={handleCartClick} to="/cart">Buy Now</Link>
                             </div>
 
                         </div>
-
-
 
                         <div className="col-lg-6 col-md-9 col-sm-12 mt-4 ">
                             <div className="card" >
@@ -101,7 +129,7 @@ function ProductDetails({ product }) {
                                     <h3 className="card-title">Select Size</h3>
 
                                     {product.sizes.map((el, i) => (
-                                        <span key={i} class="btn btn-outline-secondary rounded m-2" onClick={() => handleSizeSelection(el)}>{el}</span>
+                                        <span key={i} className={`btn rounded m-2 ${el === selectedSize ? 'btn-secondary':'btn-outline-secondary'} `} onClick={() => handleSizeSelection(el)}>{el}</span>
 
                                     ))}
 

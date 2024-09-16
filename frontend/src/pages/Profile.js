@@ -2,8 +2,10 @@
 import { Link, useNavigate } from "react-router-dom"
 import ProfileNav from "../components/ProfileNav"
 import Footer from "../components/Footer"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { updateCartCount } from "../actions/CartActions";
 
 
 function Profile() {
@@ -11,6 +13,11 @@ function Profile() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        localStorage.clear()
+    },[])
 
      let handleSubmit = async (e) =>{
         e.preventDefault(); 
@@ -31,6 +38,9 @@ function Profile() {
             if (data.status === 'success') {
                 localStorage.setItem('loggedInUser', JSON.stringify(data.user))
                 toast.success('Login Successful!');
+                if(data.UserCart){
+                    dispatch(updateCartCount(data.userCart?.items?.length))
+                }
                 setTimeout(() => {
                     switch(data.user.usertype) {
                         case 'customer':
@@ -90,7 +100,7 @@ function Profile() {
                             </div>
 
                             <div className="col">
-                                <Link href="">Forgot password?</Link>
+                                <Link to='/forgetPassword'>Forgot password?</Link>
                             </div>
                         </div>
 

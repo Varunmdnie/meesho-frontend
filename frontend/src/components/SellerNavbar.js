@@ -4,7 +4,7 @@ function SellerNavbar() {
     let navigate = useNavigate()
 
     let handleLogout = () =>{
-        localStorage.removeItem('loggedInUser')
+        localStorage.clear()
         setTimeout(() =>{
            
                 navigate('/')

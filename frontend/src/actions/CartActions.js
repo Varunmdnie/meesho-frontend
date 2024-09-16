@@ -32,5 +32,11 @@ export const IncrementQuantity = (id) => {
       payload: id
     };
   };
+  export const updateCartCount = (cartCount) => {
+    return {
+      type: 'UPDATE_CART_COUNT',
+      payload: {cartCount}
+    };
+  };
 
 

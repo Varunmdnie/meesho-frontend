@@ -51,7 +51,6 @@ let productSchema = new mongoose.Schema({
     }
     
 
-
 })
 
 let Product = mongoose.model('Product',productSchema)
