@@ -24,7 +24,6 @@ const ForgetPassword = () => {
 
             const data = await response.json();
             setMessage(data.message);
-            navigate('/resetPassword')
             
         } catch (error) {
             setMessage('Something went wrong, please try again.');
@@ -49,7 +48,7 @@ const ForgetPassword = () => {
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary btn-block mb-4">
+                        <button  className="btn btn-primary btn-block mb-4">
                             Send Password Reset Link
                         </button>
                         {message && <p>{message}</p>}

@@ -1,5 +1,7 @@
 
 let Cart = require('../model/cart')
+let stripe = require('stripe')(process.env.STRIPE_KEY)
+
 
 let cartAdd = async (req, res) => {
     try {
@@ -19,9 +21,9 @@ let cartAdd = async (req, res) => {
             const existingProductIndex = cart.items.findIndex(item => item.productId.toString() === productId && item.size === size);
 
             if (existingProductIndex >= 0) {
-                // If the product with the same size already exists in the cart, update the quantity
+                
                 cart.items[existingProductIndex].quantity += quantity;
-                cart.items[existingProductIndex].price = price; // Update price in case it has changed
+                cart.items[existingProductIndex].price = price;
             } else {
                 // Otherwise, add a new product to the cart
                 cart.items.push({ productId, quantity, price, size, details:{image:product.images[0], name:product.title} });
@@ -31,7 +33,7 @@ let cartAdd = async (req, res) => {
             cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0) + 50;// 50 delivery price
         }
 
-        // Save the cart
+        
         await cart.save();
 
         res.send({status:'success', message: 'Item added to cart successfully', cart})
@@ -156,6 +158,45 @@ let removeFromCart = async (req, res) => {
 };
 
 
+let makePayment = async (req,res) =>{
+
+    const { amount } = req.body; // Amount should be passed from client
+// console.log(amount);
+
+    try {
+       
+
+        
+
+    const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    mode: "payment",
+    line_items: [
+        {
+            price_data: {
+              currency: "INR",
+              product_data: {
+                name: 'qwertyui',
+              },
+              unit_amount: amount*100
+            },
+            quantity:2,
+          }
+    ],
+    success_url: `http://localhost:3000/success/`,
+    cancel_url: `http://localhost:3000/cancel`,
+  },{apiKey: process.env.STRIPE_KEY})
+      
+        res.json({ id: session.id });
+      } catch (error) {
+        console.error('Error creating Stripe session:', error.message);
+        res.status(500).json({ error: 'An error occurred, please try again later.' });
+      }
+      
+
+}
 
 
-module.exports = {cartAdd, fetchCart, removeFromCart, decrementItem, incrementItem};
+
+
+module.exports = {cartAdd, fetchCart, removeFromCart, decrementItem, incrementItem,makePayment};

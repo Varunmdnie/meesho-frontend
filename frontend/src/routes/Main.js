@@ -33,6 +33,7 @@ import Seller from '../pages/Seller';
 import ProtectedRoute from '../routes/ProtectedRoutes';
 import ForgetPassword from '../pages/ForgetPassword'
 import ResetPassword from '../pages/ResetPassword';
+import Stripe from '../pages/Stripe';
 
 
 
@@ -74,14 +75,15 @@ function Main() {
                     <Route path='/signup' element={<SignUp />} />
                     <Route path='/forgetPassword' element={<ForgetPassword />} />
                     <Route path='/resetPassword/:token' element={<ResetPassword/>} />
+                    <Route path='/stripe' element={<Stripe/>} />
                     
                     <Route path='/details/:id' element={<Details />} />
 
-                        <Route path='/payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-                        <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-                        <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
-                        <Route path='/seller/add' element={<ProtectedRoute><SellerAdd /></ProtectedRoute>} />
-                        <Route path='/seller' element={<ProtectedRoute><Seller /></ProtectedRoute>} />
+                    <Route path='/payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+                    <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+                    <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+                    <Route path='/seller/add' element={<ProtectedRoute><SellerAdd /></ProtectedRoute>} />
+                    <Route path='/seller' element={<ProtectedRoute><Seller /></ProtectedRoute>} />
 
                     <Route path="*" element={<Navigate to="/" />} />
 

@@ -80,7 +80,7 @@ let forgetPassword = async (req,res) =>{
             from: 'varunmd20@gmail.com',
             to: email,
             subject: 'Reset password',
-            text: `http://localhost:4000/api/users/resetPassword/${resetToken}`
+            text: `http://localhost:3000/resetPassword/${resetToken}`
           };
 
 
@@ -126,5 +126,5 @@ let resetPassword = async (req,res) =>{
 }
 
 
-module.exports = { login, register,logout,cart,forgetPassword,resetPassword}
+module.exports = { login,register,logout,cart,forgetPassword,resetPassword}
 

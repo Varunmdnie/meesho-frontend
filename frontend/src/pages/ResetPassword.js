@@ -37,7 +37,7 @@ const ResetPassword = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="form-outline mb-4">
                             <input
-                                type="email"
+                                type="password"
                                 placeholder="Enter new password"
                                 className="form-control"
                                 value={password}

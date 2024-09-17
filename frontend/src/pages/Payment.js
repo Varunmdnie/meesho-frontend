@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar"
 import { useSelector } from "react-redux";
 
 
+
 function Payment() {
 
     const deliveryCharges = useSelector(state => state.cart.deliveryCharges);
@@ -57,37 +58,33 @@ function Payment() {
                                     
                                     </div>
 
-                                    
-
-                              
-
                                     <hr class="my-4" />
 
                                     <h5 class="mb-4">Payment</h5>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm3"
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm1"
                                             checked />
-                                        <label class="form-check-label" for="checkoutForm3">
-                                            Credit card
+                                        <label class="form-check-label" for="checkoutForm1">
+                                            Cash on delivery
                                         </label>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm4" />
-                                        <label class="form-check-label" for="checkoutForm4">
-                                            Debit card
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm2" />
+                                        <label class="form-check-label" for="checkoutForm2">
+                                            Stripe
                                         </label>
                                     </div>
 
-                                    <div class="form-check mb-4">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm5" />
-                                        <label class="form-check-label" for="checkoutForm5">
+                                    {/* <div class="form-check mb-4">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm3" />
+                                        <label class="form-check-label" for="checkoutForm3">
                                             UPI
                                         </label>
-                                    </div>
+                                    </div> */}
 
-                                    <div class="row mb-4">
+                                    {/* <div class="row mb-4">
                                         <div class="col">
                                             <div data-mdb-input-init class="form-outline">
                                                 <input type="text" id="formNameOnCard" class="form-control" />
@@ -115,7 +112,7 @@ function Payment() {
                                                 <label class="form-label" for="formCVV">CVV</label>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     
                                 </form>
@@ -152,6 +149,7 @@ function Payment() {
                         </div>
                         <div className="d-flex justify-content-center">
                          <Link to='/orders' className="btn  btn-primary w-100">proceed to checkout</Link>
+                         
                         </div>
                         
                        

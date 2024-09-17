@@ -97,7 +97,7 @@ function Cart() {
         }).catch((err) => console.log(err))
     };
 
-    const handleImageClick = async (product) => {
+    const handleImageClick = async (product) => {                   
         fetch('http://localhost:4000/api/products/getProductById',{
             method:'POST',
             headers:{

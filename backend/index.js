@@ -9,6 +9,7 @@ let app = express()
 
 dotenv.config()
 let PORT = process.env.PORT || 5000
+
 connectDB()
 app.use(express.json())
 app.use(cors())
