@@ -3,6 +3,7 @@ let dotenv = require('dotenv')
 let userRoutes = require('./routes/userRoutes')
 let productRoutes = require('./routes/productRoutes')
 let cartRoutes = require('./routes/cartRoutes')
+let orderRoutes = require('./routes/orderRoutes')
 let cors = require('cors')
 let connectDB = require('./config/database')
 let app = express()
@@ -17,6 +18,7 @@ app.use(cors())
 app.use('/api/users',userRoutes)
 app.use('/api/products',productRoutes)
 app.use('/api/cart',cartRoutes)
+app.use('/api/order',orderRoutes)
 
 
 

@@ -15,7 +15,7 @@ function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [deliveryCharges, setDeliveryCharges] = useState(50);
-    const grandTotal = useSelector(state => state.cart.grandTotal);
+   
 
     let navigate = useNavigate()
 

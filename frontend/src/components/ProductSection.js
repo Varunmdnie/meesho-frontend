@@ -14,7 +14,7 @@ function ProductSection() {
 
         search$.subscribe(searchTerm=>{
             if(!searchTerm) return
-            setProductsList(productsList.filter((item) => (item.title.toLowerCase()).includes(searchTerm.toLowerCase())))
+            setProductsList(products.filter((item) => (item.title.toLowerCase()).includes(searchTerm.toLowerCase())))
         });
     },[])
 
@@ -40,8 +40,6 @@ function ProductSection() {
         }
 
     }
-
-    
     
 
     return (
@@ -68,6 +66,7 @@ function ProductSection() {
                                 ))
                             }
                         </div>
+                        
                     </section>
                 </div>
             </div>

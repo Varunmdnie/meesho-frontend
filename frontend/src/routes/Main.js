@@ -34,6 +34,8 @@ import ProtectedRoute from '../routes/ProtectedRoutes';
 import ForgetPassword from '../pages/ForgetPassword'
 import ResetPassword from '../pages/ResetPassword';
 import Stripe from '../pages/Stripe';
+import Success from '../pages/success';
+import Cancel from '../pages/Cancel';
 
 
 
@@ -76,6 +78,8 @@ function Main() {
                     <Route path='/forgetPassword' element={<ForgetPassword />} />
                     <Route path='/resetPassword/:token' element={<ResetPassword/>} />
                     <Route path='/stripe' element={<Stripe/>} />
+                    <Route path='/success' element={<Success/>}/>
+                    <Route path='/cancel' element={<Cancel/>}/>
                     
                     <Route path='/details/:id' element={<Details />} />
 

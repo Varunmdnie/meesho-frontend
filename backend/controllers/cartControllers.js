@@ -30,7 +30,7 @@ let cartAdd = async (req, res) => {
             }
 
             // Recalculate the total price
-            cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0) + 50;// 50 delivery price
+            cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0);// 50 delivery price
         }
 
         
@@ -82,7 +82,7 @@ let incrementItem = async (req, res) => {
             return res.status(404).json({ message: "Item not found in cart" });
         }
 
-        cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0) + 50; // Recalculate total price including delivery cost
+        cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0); // Recalculate total price including delivery cost
 
         await cart.save();
         res.status(200).json({status: 'success', message: 'Item quantity incremented', cart});
@@ -114,7 +114,7 @@ let decrementItem = async (req, res) => {
             return res.status(404).json({ message: "Item not found in cart" });
         }
 
-        cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0) + 50; // Recalculate total price including delivery cost
+        cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0); // Recalculate total price including delivery cost
 
         await cart.save();
         res.status(200).json({status: 'success', message: 'Item quantity decremented', cart});
@@ -146,7 +146,7 @@ let removeFromCart = async (req, res) => {
         if (cart.items.length === 0) {
             cart.totalPrice = 0; // If the cart is empty, set the total price to 0
         } else {
-            cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0) + 50; // Recalculate total price including delivery cost
+            cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0); // Recalculate total price including delivery cost
         }
 
         await cart.save();
@@ -160,29 +160,40 @@ let removeFromCart = async (req, res) => {
 
 let makePayment = async (req,res) =>{
 
-    const { amount } = req.body; // Amount should be passed from client
+    const { amount, cart } = req.body; 
 // console.log(amount);
 
     try {
-       
 
+        const lineItems = cart.items.map((item)=>({
+            price_data:{
+                currency:"inr",
+                product_data:{
+                    name:item.details.name,
+                },
+                unit_amount:item.price*100,
+            },
+            quantity:item.quantity
+        }));
+
+        const shippingCharge = {
+            price_data: {
+                currency: "inr",
+                product_data: {
+                    name: "Shipping Charge",
+                },
+                unit_amount: 50 *100,
+            },
+            quantity: 1,
+        };
         
+        
+        lineItems.push(shippingCharge);
 
     const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "payment",
-    line_items: [
-        {
-            price_data: {
-              currency: "INR",
-              product_data: {
-                name: 'qwertyui',
-              },
-              unit_amount: amount*100
-            },
-            quantity:2,
-          }
-    ],
+    line_items: lineItems,
     success_url: `http://localhost:3000/success/`,
     cancel_url: `http://localhost:3000/cancel`,
   },{apiKey: process.env.STRIPE_KEY})
@@ -190,7 +201,7 @@ let makePayment = async (req,res) =>{
         res.json({ id: session.id });
       } catch (error) {
         console.error('Error creating Stripe session:', error.message);
-        res.status(500).json({ error: 'An error occurred, please try again later.' });
+        res.status(500).json({ error: 'An error occurred, please try again later.', error });
       }
       
 
