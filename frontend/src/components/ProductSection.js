@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 import ProductItem from "./ProductItem"
 import Sidebar from "./Sidebar"
-import { search$ } from '../state'
+// import { search$ } from '../state'
 
 function ProductSection() {
     let [productsList, setProductsList] = useState([])
@@ -18,17 +18,17 @@ function ProductSection() {
         })
         .catch((err) => console.log(err))
 
-        search$.subscribe(searchTerm=>{
-            if (!searchTerm) {
-                setProductsList([...products]);
-                return;
-            }
+        // search$.subscribe(searchTerm=>{
+        //     if (!searchTerm) {
+        //         setProductsList([...products]);
+        //         return;
+        //     }
             
-            let filteredItems = products.filter((item) => 
-                item.title.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-            setProductsList([...filteredItems]);
-        });
+        //     let filteredItems = products.filter((item) => 
+        //         item.title.toLowerCase().includes(searchTerm.toLowerCase())
+        //     );
+        //     setProductsList([...filteredItems]);
+        // });
     },[])
 
     const filterProducts = (action) => {
