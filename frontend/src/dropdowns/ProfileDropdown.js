@@ -41,9 +41,9 @@ function ProfileDropdown() {
                     {localStorage.getItem('loggedInUser') ? null :<Link to="/login">Login</Link>}
                     {localStorage.getItem('loggedInUser') ? null :<Link to="/signup">Sign Up</Link>}
                     {localStorage.getItem('loggedInUser') ?  <Link to="/orders">My Orders</Link> :null}
-                   
                     <Link to="/login">sell products</Link>
-                    <Link to='/' onClick={handleLogout}>Logout</Link>
+                    {localStorage.getItem('loggedInUser')? <Link to='/' onClick={handleLogout}>Logout</Link>:null }
+                    
                 </div>
             </div>
 

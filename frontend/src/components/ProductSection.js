@@ -4,17 +4,30 @@ import { useEffect, useState } from "react"
 import ProductItem from "./ProductItem"
 import Sidebar from "./Sidebar"
 import { search$ } from '../state'
+
 function ProductSection() {
     let [productsList, setProductsList] = useState([])
     let [products, setProducts] = useState([])
 
     useEffect(() =>{
-        fetch('http://localhost:4000/api/products/getProducts').then((res) => res.json())
-        .then((productsList) => {setProducts(productsList.products); setProductsList(productsList.products)}).catch((err) => console.log(err))
+        fetch('http://localhost:4000/api/products/getProducts')
+        .then((res) => res.json())
+        .then((data) => {
+            setProducts(data.products); 
+            setProductsList(data.products)
+        })
+        .catch((err) => console.log(err))
 
         search$.subscribe(searchTerm=>{
-            if(!searchTerm) return
-            setProductsList(products.filter((item) => (item.title.toLowerCase()).includes(searchTerm.toLowerCase())))
+            if (!searchTerm) {
+                setProductsList([...products]);
+                return;
+            }
+            
+            let filteredItems = products.filter((item) => 
+                item.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setProductsList([...filteredItems]);
         });
     },[])
 

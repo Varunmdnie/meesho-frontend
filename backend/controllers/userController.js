@@ -30,18 +30,18 @@ let login = async (req, res) => {
         if (!user) {
             return res.status(400).json({ status: 'failed', message: 'User not found' });
         }
-        let payload = { id: user.id }
-
+        
         let isValidPwd = await bcrypt.compare(password, user.password)
         if (!isValidPwd) {
             res.status(400).json({ status: 'failed', message: 'password not valid' })
         }else {
+            let payload = { _id: user._id }
             jwt.sign(payload, process.env.SECRET_KEY, async (err, token) => {
                 if (err) throw err
-                user.token = token
+                
                 let UserCart = await Cart.findOne({userId:user.id})
                 
-                 res.status(201).json({ status: 'success', message: 'Loggedin successfully', user, UserCart })
+                 res.status(201).json({ status: 'success', message: 'Loggedin successfully', user,token, UserCart })
             })
 
         }

@@ -20,12 +20,12 @@ function Landing() {
             {searchString ? null : 
                 <> <div className="  container mt-5" style={{ width: "75rem" }}>
 
-                    <img src="../assets/banner1.jpg" class="card-img-top" alt="..." />
+                    <img src="../assets/banner1.jpg" className="card-img-top" alt="..." />
 
                 </div>
 
                     <div className=" container mt-5" style={{ width: "75rem" }}>
-                        <img src="../assets/banner2.jpg" class="card-img-top" alt="..." />
+                        <img src="../assets/banner2.jpg" className="card-img-top" alt="..." />
                     </div></>
                 }
 

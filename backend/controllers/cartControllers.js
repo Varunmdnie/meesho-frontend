@@ -1,6 +1,8 @@
 
-let Cart = require('../model/cart')
+let Cart = require('../model/cart');
+const Order = require('../model/orders');
 let stripe = require('stripe')(process.env.STRIPE_KEY)
+
 
 
 let cartAdd = async (req, res) => {
@@ -13,51 +15,67 @@ let cartAdd = async (req, res) => {
         if (!cart) {
             cart = new Cart({
                 userId,
-                items: [{ productId, quantity, price, size, details: {image:product.images[0], name:product.title} }],
+                items: [{ productId, quantity, price, size, details: { image: product.images[0], name: product.title } }],
                 totalPrice: quantity * product.price
             });
-        } else { 
+        } else {
             // If cart exists, update it
             const existingProductIndex = cart.items.findIndex(item => item.productId.toString() === productId && item.size === size);
 
             if (existingProductIndex >= 0) {
-                
+
                 cart.items[existingProductIndex].quantity += quantity;
                 cart.items[existingProductIndex].price = price;
             } else {
                 // Otherwise, add a new product to the cart
-                cart.items.push({ productId, quantity, price, size, details:{image:product.images[0], name:product.title} });
+                cart.items.push({ productId, quantity, price, size, details: { image: product.images[0], name: product.title } });
             }
 
             // Recalculate the total price
             cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0);// 50 delivery price
         }
 
-        
+
         await cart.save();
 
-        res.send({status:'success', message: 'Item added to cart successfully', cart})
+        res.send({ status: 'success', message: 'Item added to cart successfully', cart })
 
     } catch (error) {
-        res.send({status:'failed', message: error.message})
+        res.send({ status: 'failed', message: error.message })
     }
 }
 
-let fetchCart = async (req, res) =>{
+let fetchCart = async (req, res) => {
     try {
-        const {userId} = req.body;
-    
+        const { userId } = req.body;
+
         const cart = await Cart.findOne({ userId });
-    
+
         if (!cart) {
-          return res.status(404).json({ message: "Cart is empty" });
+            return res.status(404).json({ message: "Cart is empty" });
         }
 
-        res.status(200).json({status:'success', message: 'Cart saved successufully', cart});
-      } catch (error) {
+        res.status(200).json({ status: 'success', message: 'Cart saved successufully', cart });
+    } catch (error) {
         console.error('Error fetching cart:', error);
         res.status(500).json({ message: "Failed to fetch cart" });
-      }
+    }
+}
+let fetchCartById = async (req, res) => {
+    try {
+        const { cartId } = req.body;
+
+        const cart = await Cart.findOne({ _id: cartId });
+
+        if (!cart) {
+            return res.status(404).json({ message: "Cart is empty" });
+        }
+
+        res.status(200).json({ status: 'success', message: 'Cart saved successufully', cart });
+    } catch (error) {
+        console.error('Error fetching cart:', error);
+        res.status(500).json({ message: "Failed to fetch cart" });
+    }
 }
 
 let incrementItem = async (req, res) => {
@@ -67,15 +85,15 @@ let incrementItem = async (req, res) => {
         let cart = await Cart.findOne({ userId });
         // console.log(productId);
         // console.log(cart.items.productId.toString());
-        
-        
+
+
         if (!cart) {
             return res.status(404).json({ message: "Cart not found" });
         }
 
         const existingProductIndex = cart.items.findIndex(item => item._id.toString() === productId);
         // console.log(existingProductIndex);
-        
+
         if (existingProductIndex >= 0) {
             cart.items[existingProductIndex].quantity += 1;
         } else {
@@ -85,7 +103,7 @@ let incrementItem = async (req, res) => {
         cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0); // Recalculate total price including delivery cost
 
         await cart.save();
-        res.status(200).json({status: 'success', message: 'Item quantity incremented', cart});
+        res.status(200).json({ status: 'success', message: 'Item quantity incremented', cart });
 
     } catch (error) {
         res.status(500).json({ status: 'failed', message: error.message });
@@ -117,7 +135,7 @@ let decrementItem = async (req, res) => {
         cart.totalPrice = cart.items.reduce((total, item) => total + (item.price * item.quantity), 0); // Recalculate total price including delivery cost
 
         await cart.save();
-        res.status(200).json({status: 'success', message: 'Item quantity decremented', cart});
+        res.status(200).json({ status: 'success', message: 'Item quantity decremented', cart });
 
     } catch (error) {
         res.status(500).json({ status: 'failed', message: error.message });
@@ -128,8 +146,8 @@ let removeFromCart = async (req, res) => {
     try {
         const { userId, productId, size } = req.body;
         // console.log(userId);
-        
-        let cart = await Cart.findOne({userId:userId})
+
+        let cart = await Cart.findOne({ userId: userId })
 
         if (!cart) {
             return res.status(404).json({ message: "Cart not found" });
@@ -150,30 +168,45 @@ let removeFromCart = async (req, res) => {
         }
 
         await cart.save();
-        res.status(200).json({status: 'success', message: 'Item removed from cart', cart});
+        res.status(200).json({ status: 'success', message: 'Item removed from cart', cart });
 
     } catch (error) {
         res.status(500).json({ status: 'failed', message: error.message });
     }
 };
 
+let makePayment = async (req, res) => {
 
-let makePayment = async (req,res) =>{
-
-    const { amount, cart } = req.body; 
-// console.log(amount);
+    const { cart, address, email, phoneNumber, name, userId,modeOfPayment } = req.body;
+    // console.log(amount);
 
     try {
 
-        const lineItems = cart.items.map((item)=>({
-            price_data:{
-                currency:"inr",
-                product_data:{
-                    name:item.details.name,
+        const existingOrder = await Order.findOne({ cart_id: cart._id });
+        if (!existingOrder) {
+            let order = new Order({
+                address,
+                email,
+                modeOfPayment: 'stripe',
+                name: name,
+                phoneNumber,
+                userId,
+                cart_id: cart._id
+            })
+
+            await order.save()
+        }
+
+
+        const lineItems = cart.items.map((item) => ({
+            price_data: {
+                currency: "inr",
+                product_data: {
+                    name: item.details.name,
                 },
-                unit_amount:item.price*100,
+                unit_amount: item.price * 100,
             },
-            quantity:item.quantity
+            quantity: item.quantity
         }));
 
         const shippingCharge = {
@@ -182,32 +215,32 @@ let makePayment = async (req,res) =>{
                 product_data: {
                     name: "Shipping Charge",
                 },
-                unit_amount: 50 *100,
+                unit_amount: 50 * 100,
             },
             quantity: 1,
         };
-        
-        
+
+
         lineItems.push(shippingCharge);
 
-    const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
-    mode: "payment",
-    line_items: lineItems,
-    success_url: `http://localhost:3000/success/`,
-    cancel_url: `http://localhost:3000/cancel`,
-  },{apiKey: process.env.STRIPE_KEY})
-      
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ["card"],
+            mode: "payment",
+            line_items: lineItems,
+            success_url: `http://localhost:3000/success/`,
+            cancel_url: `http://localhost:3000/cancel`,
+        }, { apiKey: process.env.STRIPE_KEY })
+
         res.json({ id: session.id });
-      } catch (error) {
+    } catch (error) {
         console.error('Error creating Stripe session:', error.message);
         res.status(500).json({ error: 'An error occurred, please try again later.', error });
-      }
-      
+    }
+
 
 }
 
 
 
 
-module.exports = {cartAdd, fetchCart, removeFromCart, decrementItem, incrementItem,makePayment};
+module.exports = { cartAdd, fetchCart, removeFromCart, decrementItem, incrementItem,makePayment, fetchCartById};

@@ -26,6 +26,7 @@ function Profile() {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                'Authorization':localStorage.getItem('userToken'),
               },
               body: JSON.stringify({
                 email: email,
@@ -37,6 +38,7 @@ function Profile() {
            
             if (data.status === 'success') {
                 localStorage.setItem('loggedInUser', JSON.stringify(data.user))
+                localStorage.setItem('userToken', data.token)
                 toast.success('Login Successful!');
                 if(data.UserCart){
                     dispatch(updateCartCount(data.userCart?.items?.length))
@@ -46,9 +48,7 @@ function Profile() {
                         case 'customer':
                             navigate('/');
                             break;
-                        case 'admin':
-                            navigate('/admin');
-                            break;
+                     
                         case 'seller':
                             navigate('/seller');
                             break;

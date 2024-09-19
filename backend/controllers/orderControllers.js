@@ -1,34 +1,60 @@
 
 let Order = require('../model/orders')
 
+
 let orderAdd = async (req,res) =>{
     try {
-        const { name, address, email, phoneNumber, modeOfPayment, userId } = req.body;
+        const { cart, name, address, email, phoneNumber, modeOfPayment, userId } = req.body;
 
-        // Basic validation
-        if (!name || !address || !email || !phoneNumber || !modeOfPayment ||!userId) {
-            return res.status(400).json({ error: "All fields are required" });
-        }
-
+        
+        const existingOrder = await Order.findOne({ cart_id: cart._id });
         // Create a new order document
-        const order = new Order({
-            name,
-            address,
-            email,
-            phoneNumber,
-            modeOfPayment,
-            userId
-        });
+        
+        if(!existingOrder){
+            const order = new Order({
+                name,
+                address,
+                email,
+                phoneNumber,
+                modeOfPayment : 'Cash on delivery',
+                userId,
+                cart_id: cart._id
+            });
 
-        // Save the order to the database
-        await order.save();
+            await order.save();
 
-        // Send success response
-        res.status(201).json({ status:'success', message: "Order created successfully", order });
+        }
+        res.status(201).json({ status:'success', message: "Order created successfully" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });
     }
     
 }
-module.exports = orderAdd
+
+let fetchOrderByUserId = async (req,res) =>{
+  
+  
+   
+    try {
+        let {userId} = req.body
+        let order = await Order.findOne({userId})
+        
+        
+    
+        if(!order){
+            res.status(400).json({message:"order is empty"})
+        }else{
+            res.status(200).json({ status: 'success', order });
+        }   
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' }); 
+    }
+   
+   
+
+}
+
+module.exports = {orderAdd,fetchOrderByUserId}
+

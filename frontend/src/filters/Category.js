@@ -15,13 +15,13 @@ function Category({categoryFilter}) {
                     </h2>
                     <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                            <span onClick={() => categoryFilter({data:["men"],type:'category'})}  class="btn btn-outline-secondary rounded-pill m-2">Men</span>
-                            <span onClick={() => categoryFilter({data:["women"],type:'category'})}  class="btn btn-outline-secondary rounded-pill m-2">Women</span>
-                            <span onClick={() => categoryFilter({data:["kids"],type:'category'})} class="btn btn-outline-secondary rounded-pill m-2">Kids</span>
-                            <span onClick={() => categoryFilter({data:["beauty"],type:'category'})} class="btn btn-outline-secondary rounded-pill m-2">Beauty</span>
+                            <span onClick={() => categoryFilter({data:["men"],type:'category'})}  className="btn btn-outline-secondary rounded-pill m-2">Men</span>
+                            <span onClick={() => categoryFilter({data:["women"],type:'category'})}  className="btn btn-outline-secondary rounded-pill m-2">Women</span>
+                            <span onClick={() => categoryFilter({data:["kids"],type:'category'})} className="btn btn-outline-secondary rounded-pill m-2">Kids</span>
+                            <span onClick={() => categoryFilter({data:["beauty"],type:'category'})} className="btn btn-outline-secondary rounded-pill m-2">Beauty</span>
 
-                            <span onClick={() => categoryFilter({data:["home&kitchen"],type:'category'})} class="btn btn-outline-secondary rounded-pill m-2">Home</span>
-                            <span onClick={() => categoryFilter({data:["electronics"],type:'category'})}  class="btn btn-outline-secondary rounded-pill m-2">Electronics</span>
+                            <span onClick={() => categoryFilter({data:["home&kitchen"],type:'category'})} className="btn btn-outline-secondary rounded-pill m-2">Home</span>
+                            <span onClick={() => categoryFilter({data:["electronics"],type:'category'})}  className="btn btn-outline-secondary rounded-pill m-2">Electronics</span>
                             
 
 

@@ -19,7 +19,7 @@ function Footer() {
                             </div>
                             <div className="col-md-5 col-12">
 
-                                <div data-mdb-input-init class="form-outline mb-4">
+                                <div data-mdb-input-init className="form-outline mb-4">
                                     <input type="email" id="form5Example24" className="form-control" placeholder="Email address" />
                                     
                                 </div>

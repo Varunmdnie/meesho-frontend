@@ -42,10 +42,15 @@ function Stripe({name,email,address,phoneNumber}) {
   
     const response = await fetch('http://localhost:4000/api/cart/makePayment', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json',
+                 'Authorization':localStorage.getItem('userToken') },
       body: JSON.stringify({ 
-        cart:cart
-
+        cart,
+        name,
+        email,
+        address,
+        phoneNumber,
+        userId:JSON.parse(localStorage.getItem('loggedInUser'))._id
       }) 
     });
 

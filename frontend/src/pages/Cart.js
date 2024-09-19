@@ -11,7 +11,7 @@ import {  toast, ToastContainer } from 'react-toastify';
 
 
 function Cart() {
-
+    
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [deliveryCharges, setDeliveryCharges] = useState(50);
@@ -97,7 +97,8 @@ function Cart() {
         }).catch((err) => console.log(err))
     };
 
-    const handleImageClick = async (product) => {                   
+    const handleImageClick = async (product) => {  
+                         
         fetch('http://localhost:4000/api/products/getProductById',{
             method:'POST',
             headers:{
@@ -123,7 +124,8 @@ function Cart() {
         fetch('http://localhost:4000/api/cart/fetchCart',{
             method:'POST',
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization':localStorage.getItem('userToken'),
             },
             body:JSON.stringify({
                 userId:JSON.parse(localStorage.getItem('loggedInUser'))._id

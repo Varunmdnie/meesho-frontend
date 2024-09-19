@@ -32,9 +32,9 @@ function Seller() {
         <>
 
             <SellerNavbar />
-            <div class="container mt-5">
+            <div className="container mt-5">
                 <div className="container text-muted border  rounded shadow mb-3">
-                    <h2 class="text-center mb-4">Your listed Products</h2>
+                    <h2 className="text-center mb-4">Your listed Products</h2>
 
                 </div>
 

@@ -14,6 +14,7 @@ function Payment() {
    
     const [paymentMode, setPaymentMode] = useState('cod')
     const [cartItems, setCartItems] = useState([]);
+    const [cart, setCart] = useState({});
     const [totalPrice, setTotalPrice] = useState(0);
     const [deliveryCharges, setDeliveryCharges] = useState(50);
 
@@ -38,6 +39,7 @@ function Payment() {
             if(data.status === 'success'){
                 setCartItems(data.cart.items);
                 setTotalPrice(data.cart.totalPrice);
+                setCart(data.cart)
                
             }else{
                 toast.error(data.message)
@@ -60,7 +62,8 @@ function Payment() {
                     address:address,
                     email:email,
                     phoneNumber:phoneNumber,
-                    userId: JSON.parse(localStorage.getItem('loggedInUser'))
+                    userId: JSON.parse(localStorage.getItem('loggedInUser')),
+                    cart:cart
 
                 })
             });
@@ -71,7 +74,7 @@ function Payment() {
             // Handle successful or failed login attempt
             if (data.status === 'success') {
 
-                toast.success('order successful');
+                // toast.success('order successful');
                
 
             } else {
@@ -88,20 +91,20 @@ function Payment() {
             <Navbar />
             <section>
                   <form onSubmit={handleOrder}>
-                <div class="row container mt-5">
+                <div className="row container mt-5">
                
-                    <div class="col-md-8 mb-4">
-                        <div class="card mb-4">
-                            <div class="card-header py-3">
-                                <h5 class="mb-0">Biling details</h5>
+                    <div className="col-md-8 mb-4">
+                        <div className="card mb-4">
+                            <div className="card-header py-3">
+                                <h5 className="mb-0">Biling details</h5>
                             </div>
-                            <div class="card-body">
+                            <div className="card-body">
                                 <form>
 
-                                    <div class="row mb-4">
-                                        <div class="col">
-                                            <div data-mdb-input-init class="form-outline">
-                                                <input placeholder="name" type="text" id="form6Example1" class="form-control" required
+                                    <div className="row mb-4">
+                                        <div className="col">
+                                            <div data-mdb-input-init className="form-outline">
+                                                <input placeholder="name" type="text" id="form6Example1" className="form-control" required
                                                 value={name} onChange={(e) => setName(e.target.value)}/>
 
                                             </div>
@@ -110,42 +113,42 @@ function Payment() {
                                     </div>
 
 
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input placeholder="address" type="text" id="form6Example4" class="form-control"
+                                    <div data-mdb-input-init className="form-outline mb-4">
+                                        <input placeholder="address" type="text" id="form6Example4" className="form-control"
                                         value={address} onChange={(e) => setAddress(e.target.value)} />
 
                                     </div>
 
 
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input placeholder="email" type="email" id="form6Example5" class="form-control"
+                                    <div data-mdb-input-init className="form-outline mb-4">
+                                        <input placeholder="email" type="email" id="form6Example5" className="form-control"
                                         value={email} onChange ={(e) => setEmail(e.target.value)} />
 
                                     </div>
 
 
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input placeholder="phone number" type="number" id="form6Example6" class="form-control"
+                                    <div data-mdb-input-init className="form-outline mb-4">
+                                        <input placeholder="phone number" type="number" id="form6Example6" className="form-control"
                                         value = {phoneNumber} onChange = {(e) => setPhoneNumber(e.target.value)} />
 
                                     </div>
 
-                                    <hr class="my-4" />
+                                    <hr className="my-4" />
 
-                                    <h5 class="mb-4">Payment</h5>
+                                    <h5 className="mb-4">Payment</h5>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm1"
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm1"
                                             checked={paymentMode === 'cod'} onChange={() => setPaymentMode('cod')} />
-                                        <label class="form-check-label" for="checkoutForm1">
+                                        <label className="form-check-label" for="checkoutForm1">
                                             Cash on delivery
                                         </label>
                                     </div>
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm2"
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm2"
                                             checked={paymentMode === 'stripe'} onChange={() => setPaymentMode('stripe')} />
-                                        <label class="form-check-label" for="checkoutForm2">
+                                        <label className="form-check-label" for="checkoutForm2">
                                             Stripe
                                         </label>
                                     </div>
@@ -156,22 +159,22 @@ function Payment() {
                         </div>
                     </div>
 
-                    <div class="col-md-4 mb-4">
-                        <div class="card mb-4">
-                            <div class="card-header py-3">
-                                <h5 class="mb-0">Summary</h5>
+                    <div className="col-md-4 mb-4">
+                        <div className="card mb-4">
+                            <div className="card-header py-3">
+                                <h5 className="mb-0">Summary</h5>
                             </div>
-                            <div class="card-body">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            <div className="card-body">
+                                <ul className="list-group list-group-flush">
+                                    <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                         Products
                                         <span>₹{totalPrice}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    <li className="list-group-item d-flex justify-content-between align-items-center px-0">
                                         delivery charges
                                         <span>₹{deliveryCharges}</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <li className="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <div>
                                             <strong>Total amount</strong>
 

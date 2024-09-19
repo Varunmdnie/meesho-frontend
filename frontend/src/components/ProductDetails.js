@@ -112,7 +112,7 @@ function ProductDetails({ product }) {
 
                         <div className="col-lg-6 col-md-9 col-sm-12 mt-4 ">
                             <div className="card" >
-                                <div class="card-body">
+                                <div className="card-body">
                                     <h5 className="card-title text-muted">{product.title}</h5>
                                     <h4>₹{product.price}</h4>
 
@@ -125,7 +125,7 @@ function ProductDetails({ product }) {
                             </div>
 
                             <div className="card mt-4" >
-                                <div class="card-body">
+                                <div className="card-body">
                                     <h3 className="card-title">Select Size</h3>
 
                                     {product.sizes.map((el, i) => (
@@ -138,7 +138,7 @@ function ProductDetails({ product }) {
                             </div>
 
                             <div className="card mt-4" >
-                                <div class="card-body">
+                                <div className="card-body">
                                     <h3 className="card-title">Product Details</h3>
                                     <p className="card-text text-muted">{product.description}</p>
                                 </div>

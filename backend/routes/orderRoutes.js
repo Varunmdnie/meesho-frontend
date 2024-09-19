@@ -1,7 +1,12 @@
 let express = require('express')
-let orderAdd = require('../controllers/orderControllers')
+let {orderAdd,fetchOrderByUserId} = require('../controllers/orderControllers')
+const verify_token = require('../middleware/userVerification')
+
+
 let router = express.Router()
 
 router.post('/orderAdd',orderAdd)
+router.post('/fetchOrderByUserId', verify_token,fetchOrderByUserId)
+
 
 module.exports = router

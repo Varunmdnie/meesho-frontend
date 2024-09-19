@@ -37,17 +37,17 @@ function Navbar() {
 
                                 </li>
 
-                                <span class="vertical-line"></span>
+                                <span className="vertical-line"></span>
                                 <li className="nav-item">
                                     <Link className="nav-link" to='https://supplier.meesho.com/'><h6>Become Supplier</h6></Link>
 
                                 </li>
-                                <span class="vertical-line"></span>
+                                <span className="vertical-line"></span>
 
                                 <li className="nav-item">
                                     <Link className="nav-link" to='https://www.meesho.io/news'><h6>Newsroom</h6></Link>
                                 </li>
-                                <span class="vertical-line"></span>
+                                <span className="vertical-line"></span>
 
 
                             </ul>

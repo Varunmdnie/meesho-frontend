@@ -1,4 +1,5 @@
 let mongoose = require('mongoose')
+const cart = require('./cart')
 
 let orderSchema = new mongoose.Schema({
     name:{
@@ -25,7 +26,12 @@ let orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
-      }
+      },
+    cart_id:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cart',
+        required: true
+    }
 
 })
 

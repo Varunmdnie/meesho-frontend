@@ -13,8 +13,8 @@ function Price({priceFilter}) {
                     </h2>
                     <div id="collapseTwo" className="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                        <span onClick={() => priceFilter({data:["price"],type:'lth'})}  class="btn btn-outline-secondary rounded-pill m-2">low to high</span><br/>
-                        <span onClick={() => priceFilter({data:["price"],type:'htl'})}   class="btn btn-outline-secondary rounded-pill m-2">high to low</span>
+                        <span onClick={() => priceFilter({data:["price"],type:'lth'})}  className="btn btn-outline-secondary rounded-pill m-2">low to high</span><br/>
+                        <span onClick={() => priceFilter({data:["price"],type:'htl'})}   className="btn btn-outline-secondary rounded-pill m-2">high to low</span>
        
                             
 
