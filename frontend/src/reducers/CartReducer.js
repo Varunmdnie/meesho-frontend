@@ -137,6 +137,7 @@ const CartReducer = (state = initialState, action) => {
       return updatedState
     }
 
+
     default:
       return state;
   }

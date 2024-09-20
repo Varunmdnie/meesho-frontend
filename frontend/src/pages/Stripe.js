@@ -17,7 +17,8 @@ function Stripe({name,email,address,phoneNumber}) {
     fetch('http://localhost:4000/api/cart/fetchCart',{
         method:'POST',
         headers:{
-            'Content-Type':'application/json'
+            'Content-Type':'application/json',
+            'Authorization':localStorage.getItem('userToken'),
         },
         body:JSON.stringify({
             userId:JSON.parse(localStorage.getItem('loggedInUser'))._id

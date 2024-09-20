@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { search$ } from '../state';
+// import { useDispatch } from 'react-redux';
+// import { searchAction } from '../actions/CartActions';
 
 function SearchBar() {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState();
 
     // Debouncing the search input
     useEffect(() => {
@@ -15,12 +17,16 @@ function SearchBar() {
     }, [searchTerm]);
 
     const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
+        event.preventDefault()
+        setSearchTerm(event);
     };
+
+    
 
     return (
         <div className="container mt-2">
             <div className="dropdown w-100" style={{zIndex:"5"}}>
+             
                 <input
                     type="text"
                     className="form-control"
@@ -29,6 +35,8 @@ function SearchBar() {
                     onInput={handleInputChange}
                     data-bs-toggle="dropdown"
                 />
+               
+              
                 <div className="dropdown-menu w-100" aria-labelledby="searchBar">
                     <h5 className="text-muted ms-2">Popular Searches</h5>
                     <Link to='/saree' className="btn btn-outline-secondary rounded-pill m-2">Saree</Link>

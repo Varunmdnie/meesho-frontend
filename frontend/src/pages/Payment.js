@@ -1,10 +1,12 @@
 
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 
 import Stripe from './Stripe'
 import { useState,useEffect } from "react";
 import {toast} from 'react-toastify';
+
 
 
 
@@ -23,13 +25,16 @@ function Payment() {
     const [email,setEmail] = useState('')
     const [phoneNumber,setPhoneNumber] = useState()
 
+   
+
 
 
     useEffect(() =>{
         fetch('http://localhost:4000/api/cart/fetchCart',{
             method:'POST',
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                'Authorization':localStorage.getItem('userToken'),
             },
             body:JSON.stringify({
                 userId:JSON.parse(localStorage.getItem('loggedInUser'))._id
@@ -40,6 +45,8 @@ function Payment() {
                 setCartItems(data.cart.items);
                 setTotalPrice(data.cart.totalPrice);
                 setCart(data.cart)
+                console.log(totalPrice);
+                
                
             }else{
                 toast.error(data.message)
@@ -74,7 +81,7 @@ function Payment() {
             // Handle successful or failed login attempt
             if (data.status === 'success') {
 
-                // toast.success('order successful');
+                // toast.success('order placed');
                
 
             } else {
@@ -84,6 +91,9 @@ function Payment() {
             console.error('Error registering:', error);
         }
     }
+    
+
+  
     
 
     return (
@@ -187,7 +197,7 @@ function Payment() {
 
                         </div>
                         <div className="d-flex justify-content-center">
-                            {paymentMode === 'cod' ? <button to='/orders' className="btn btn-primary w-100 m-2" disabled={!name || !email || !address || !phoneNumber}>Place order</button> : <Stripe name={name} email={email} address={address} phoneNumber={phoneNumber} />}
+                            {paymentMode === 'cod' ? <button className="btn btn-primary w-100 m-2" disabled={!name || !email || !address || !phoneNumber}>Place order</button> : <Stripe name={name} email={email} address={address} phoneNumber={phoneNumber} />}
                         </div>
 
                     </div>

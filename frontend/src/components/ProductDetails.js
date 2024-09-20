@@ -10,7 +10,7 @@ import {  toast } from 'react-toastify';
 
 
 
-function ProductDetails({ product }) {
+function  ProductDetails({ product }) {
 
     let [selectedSize, setSelectedSize] = useState('')
     let [selectedImage, setSelectedImage] = useState(''); 

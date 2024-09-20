@@ -12,7 +12,7 @@ let verify_token = async (req,res,next) =>{
             next()
         }
         catch{
-            res.status(401).send('Invalid Token!!')
+            res.status(401).send('Invalid Token!')
         }
     }else{
         res.status(401).send('Invalid Token!!')

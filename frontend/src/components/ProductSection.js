@@ -3,33 +3,51 @@ import { useEffect, useState } from "react"
 
 import ProductItem from "./ProductItem"
 import Sidebar from "./Sidebar"
-// import { search$ } from '../state'
+import { search$ } from '../state'
 
 function ProductSection() {
     let [productsList, setProductsList] = useState([])
     let [products, setProducts] = useState([])
+    
 
-    useEffect(() =>{
+    useEffect(() => {
+        let subscription;
+    
+        
         fetch('http://localhost:4000/api/products/getProducts')
-        .then((res) => res.json())
-        .then((data) => {
-            setProducts(data.products); 
-            setProductsList(data.products)
-        })
-        .catch((err) => console.log(err))
+            .then((res) => res.json())
+            .then((data) => {
+                console.log('inside api');
+                setProducts(data.products);
+                setProductsList(data.products); 
 
-        // search$.subscribe(searchTerm=>{
-        //     if (!searchTerm) {
-        //         setProductsList([...products]);
-        //         return;
-        //     }
+            })
+            .catch((err) => console.log(err));
+    
+        
+        search$.subscribe((event) => {    
             
-        //     let filteredItems = products.filter((item) => 
-        //         item.title.toLowerCase().includes(searchTerm.toLowerCase())
-        //     );
-        //     setProductsList([...filteredItems]);
-        // });
-    },[])
+            let searchTerm = event?.target?.value
+            setProductsList((currentProducts) => {
+                if (!event) {
+                    return [...currentProducts]; 
+                }
+    
+               
+                return currentProducts.filter((item) =>
+                    item.title.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            });
+        });
+    
+        
+        return () => {
+            if (subscription) {
+                subscription.unsubscribe();
+            }
+        };
+    }, []); 
+    
 
     const filterProducts = (action) => {
 
