@@ -19,6 +19,7 @@ function SellerAdd() {
     const [productDescription, setProductDescription] = useState("");
     const [productSizes, setProductSizes] = useState([]);
     const [productColors, setProductColors] = useState([]);
+    const [quantity, setQuantity] = useState(0);
 
     let handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +35,8 @@ function SellerAdd() {
             count: productCount,
             description: productDescription,
             sizes: productSizes,
-            colors: productColors,
+            sizes: productSizes,
+            quantity: quantity,
             loggedInUser: JSON.parse(localStorage.getItem('loggedInUser'))
         };
 
@@ -86,6 +88,14 @@ function SellerAdd() {
                             <div className="col-sm-5">
                                 <input type="text" className="form-control" id="productTitle" placeholder="Enter Product Title"
                                     value={productTitle} onChange={(e) => setProductTitle(e.target.value)} />
+                            </div>
+                        </div>
+
+                        <div className="mb-3 row">
+                            <label for="productTitle" className="col-sm-1 col-form-label"> Quantity</label>
+                            <div className="col-sm-5">
+                                <input type="number" className="form-control" id="quantity" placeholder="Enter Product Title"
+                                    value={quantity} onChange={(e) => setQuantity(e.target.value)} />
                             </div>
                         </div>
 

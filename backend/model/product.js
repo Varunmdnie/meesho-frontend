@@ -48,6 +48,10 @@ let productSchema = new mongoose.Schema({
     seller_id: {
         type: mongoose.Types.ObjectId,
         required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
     }
     
 

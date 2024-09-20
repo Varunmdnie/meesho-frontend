@@ -3,9 +3,9 @@ let Product = require('../model/product')
 
 let addProducts = async (req,res) =>{
    try {
-     let {title,category,subCategory,price,images,rating,count,description,sizes,colors, loggedInUser} = req.body
+     let {title,category,subCategory,price,images,rating,count,description,sizes,colors,quantity, loggedInUser} = req.body
      let product = new Product({
-         title,category,subCategory,price,images,rating,count,description,sizes,colors, seller_id: loggedInUser._id
+         title,category,subCategory,price,images,rating,count,description,sizes,colors,quantity, seller_id: loggedInUser._id
      })
      await product.save()
  
