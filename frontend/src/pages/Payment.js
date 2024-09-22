@@ -6,13 +6,16 @@ import Navbar from "../components/Navbar"
 import Stripe from './Stripe'
 import { useState,useEffect } from "react";
 import {toast} from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { updateCartCount } from "../actions/CartActions";
 
 
 
 
 function Payment() {
 
-    
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
    
     const [paymentMode, setPaymentMode] = useState('cod')
     const [cartItems, setCartItems] = useState([]);
@@ -81,8 +84,11 @@ function Payment() {
             // Handle successful or failed login attempt
             if (data.status === 'success') {
 
-                // toast.success('order placed');
-               
+                toast.success('Order Placed Successfully');
+               setTimeout(() => {
+                 dispatch(updateCartCount(0))
+                 navigate('/orders')
+               }, 1000);
 
             } else {
                 toast.error(data.message);

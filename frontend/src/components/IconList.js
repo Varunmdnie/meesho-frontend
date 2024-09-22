@@ -10,6 +10,8 @@ import { useSelector } from "react-redux";
 
 const IconList = () => {
     const cartCounter = useSelector(state => state.cart.cartCounter); 
+    // console.log(cartCounter);
+    
    
     return (
         <>

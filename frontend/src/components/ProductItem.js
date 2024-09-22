@@ -18,21 +18,24 @@ function ProductItem({ product }) {
                 <Link className="text-decoration-none" to={{ pathname: `/details/${product._id}` }} onClick={handleProductClick}>
                     <div className="card" style={{ width: "14rem" }} >
                         <img height={"280px"} src={product.images[0]} className="card-img-top" alt={product.title} />
-
+        
                         <div className="card-body">
                             <h6 className="card-title text-muted">{product.title}</h6>
 
                             <div className="d-flex">
                                 <h4 className="me-1 text-dark">₹{product.price} </h4>
-                                <h5><sub className="text-muted"> onwards</sub></h5>
+                                <h5><sub className="text-muted me-1"> onwards </sub></h5>
+                                {product.stock === 0 ? <p className="btn btn-danger text-light btn-sm rounded-pill">sold out</p>:null }
                             </div>
                             <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6>
+                            
                             <br />
                             <div className="d-flex">
                                 <p className="card-text btn btn-success btn-sm rounded-pill me-2">{product.rating}✩</p>
                                 <p><sub className="text-muted">{product.count} Reviews</sub></p>
 
                             </div>
+                           
 
                         </div>
                     </div>

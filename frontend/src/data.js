@@ -363,7 +363,7 @@ let products = [
 },
 {
     id: 29,
-    title: "SUNGLOW MATTY TSHIRT",
+    title: "track pant",
     category:"men",
     subCategory:"pant",
     price: 499,
@@ -402,7 +402,7 @@ let products = [
 },
 {
     id: 32,
-    title: "SUNGLOW MATTY TSHIRT",
+    title: "bedsheet",
     category:"Home&Kitchen",
     subCategory:"bedsheet",
     price: 399,

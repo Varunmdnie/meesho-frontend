@@ -126,12 +126,15 @@ const CartReducer = (state = initialState, action) => {
 
       return updatedState
     }
-
+    
     case 'UPDATE_CART_COUNT':{
       const updatedState={
         ...state,
         cartCounter : action.payload.cartCount
+        
       }
+      // console.log('11111',updatedState);
+      
       localStorage.setItem("cart", JSON.stringify(updatedState));
 
       return updatedState

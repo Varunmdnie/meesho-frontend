@@ -1,6 +1,13 @@
 import { Link } from "react-router-dom"
 import { FaCheckCircle } from 'react-icons/fa';
+import { useDispatch } from "react-redux";
+import { updateCartCount } from "../actions/CartActions";
+
+
 function Success() {
+
+    let dispatch = useDispatch()
+    dispatch(updateCartCount(0))
     return (
         <>
             <div className="card text-center mx-auto mt-5" style={{ maxWidth: '22rem' }}>

@@ -104,8 +104,12 @@ function  ProductDetails({ product }) {
                             </div>
                             <div className=" d-flex justify-content-between   " style={{ width: "92%" }}>
 
-                                <button className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-50" onClick={handleCartClick} >< BsCartPlusFill /> Add to Cart</button>
+                               {product.stock >=1 ? 
+                               <>
+                               <button className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-50" onClick={handleCartClick} >< BsCartPlusFill /> Add to Cart</button>
                                 <Link className="text-decoration-none text-light btn btn-primary btn-lg w-50 m-1" onClick={handleCartClick} to="/cart">Buy Now</Link>
+                               </>
+                                : <span className="text-decoration-none text-secondary btn btn-outline-info btn-lg m-1 w-100">Out of Stock</span> }
                             </div>
 
                         </div>
@@ -118,9 +122,12 @@ function  ProductDetails({ product }) {
 
                                     <div className="d-flex">
                                         <p className="card-text btn btn-secondary btn-sm rounded-pill me-2">{product.rating}✩</p>
-                                        <p><sub className="text-muted">{product.rating} Reviews</sub></p>
+                                        <p><sub className="text-muted">{product.count} Reviews</sub></p>
                                     </div>
-                                    <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6>
+                                    <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6><br/>
+                                    <h3 className="btn btn-info btn-sm  rounded-pill"> available stock:  {product.stock}</h3>
+
+                                    
                                 </div>
                             </div>
 

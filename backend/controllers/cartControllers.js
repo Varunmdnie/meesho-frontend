@@ -1,5 +1,6 @@
 
 let Cart = require('../model/cart');
+const mongoose = require('mongoose')
 const Order = require('../model/orders');
 let stripe = require('stripe')(process.env.STRIPE_KEY)
 
@@ -63,9 +64,14 @@ let fetchCart = async (req, res) => {
 }
 let fetchCartById = async (req, res) => {
     try {
-        const { cartId } = req.body;
-
-        const cart = await Cart.findOne({ _id: cartId });
+        let { cartId } = req.body;
+        let cart;
+        if(typeof cartId == 'string'){
+             cart = await Cart.findOne({ _id: cartId });
+        }else if (Array.isArray(cartId)){
+            cartId = cartId.map(id => new mongoose.Types.ObjectId(id));
+             cart = await Cart.find({ _id: { $in:cartId } });
+        }
 
         if (!cart) {
             return res.status(404).json({ message: "Cart is empty" });

@@ -4,6 +4,7 @@ import Footer from "../components/Footer"
 
 import SellerNavbar from "../components/SellerNavbar";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function Seller() {
     // let navigate = useNavigate()
@@ -25,6 +26,28 @@ function Seller() {
             .then((data) => setData(data.products)).catch((err) => console.log(err))
 
     }, [])
+
+    const updateStock = (id, type) => {
+        // dispatch(IncrementQuantity(id));
+        fetch('http://localhost:4000/api/products/updateStock',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                productId: id,
+                type
+            })
+        }).then((res) => res.json())
+        .then((res) => {
+            if(res.status === 'success'){
+                toast.success('stock updated')
+                setData(data.map(item=> item._id === res.product._id ? {...res.product} : item))
+            }else{
+                toast.error(data.message)
+            }
+        }).catch((err) => console.log(err))
+    };
 
 
 
@@ -48,7 +71,7 @@ function Seller() {
                                 <div key={i}className="col-lg-2 col-sm-6 col-md-4 d-flex my-3 ">
 
                                         <div className="card" >
-                                            <img src={product.images[0]} className="card-img-top w-auto" alt={product.title} style={{objectFit:'contain', maxHeight:'220px'}}  />
+                                            <img src={product.images[0]} className="card-img-top w-auto" alt={product.title} style={{objectFit:'contain', maxHeight:'220px', height:'200px'}}  />
 
                                             <div className="card-body">
                                                 <h6 className="card-title text-muted">{product.title}</h6>
@@ -57,13 +80,15 @@ function Seller() {
                                                     <h4 className="me-1 text-dark">₹{product.price} </h4>
                                                     <h5><sub className="text-muted"> onwards</sub></h5>
                                                 </div>
-                                                {/* <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6>
-                                                <br />
-                                                <div className="d-flex">
-                                                    <p className="card-text btn btn-success btn-sm rounded-pill me-2">{product.rating}✩</p>
-                                                    <p><sub className="text-muted">{product.count} Reviews</sub></p>
-
-                                                </div> */}
+                                                <div className="text-muted d-flex">
+                                                    {product.stock < 1 ?<p className="btn btn-outline-secondary btn-sm me-2 disabled">-</p>:<p onClick={() => updateStock(product._id, 'decrement')} className="btn btn-outline-secondary btn-sm me-2">-</p>}
+                                                    <p className="me-2">stock : {product.stock}</p>
+                                                    <p onClick={() => updateStock(product._id, 'increment')} className="btn btn-outline-secondary btn-sm">+</p>
+                                                </div>
+                                                <div className="">
+                                                   
+                                                </div>
+                                     
                                                 
 
 

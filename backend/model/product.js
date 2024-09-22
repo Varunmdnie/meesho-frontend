@@ -49,7 +49,7 @@ let productSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         required: true
     },
-    quantity: {
+    stock: {
         type: Number,
         required: true
     }
