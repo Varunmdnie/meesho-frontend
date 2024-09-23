@@ -87,7 +87,7 @@ function Payment() {
                 toast.success('Order Placed Successfully');
                setTimeout(() => {
                  dispatch(updateCartCount(0))
-                 navigate('/orders')
+                //  navigate('/orders')
                }, 1000);
 
             } else {

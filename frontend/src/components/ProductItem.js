@@ -25,7 +25,7 @@ function ProductItem({ product }) {
                             <div className="d-flex">
                                 <h4 className="me-1 text-dark">₹{product.price} </h4>
                                 <h5><sub className="text-muted me-1"> onwards </sub></h5>
-                                {product.stock === 0 ? <p className="btn btn-danger text-light btn-sm rounded-pill">sold out</p>:null }
+                                {product.stock === 0 ? <img className="sold-out" width="50px" src="./assets/sold-out.png" />:null }
                             </div>
                             <h6 className="btn btn-light btn-sm text-muted rounded-pill">free delivery</h6>
                             

@@ -112,3 +112,9 @@
   position: -webkit-sticky;
 
 }
+
+.sold-out{
+  position: relative;
+  top: -317px;
+  left: -125px;
+}
