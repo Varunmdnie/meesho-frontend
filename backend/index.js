@@ -20,6 +20,8 @@ app.use('/api/products',productRoutes)
 app.use('/api/cart',cartRoutes)
 app.use('/api/order',orderRoutes)
 
-
+app.get('/', (req,res)=>{
+    res.send('Server running')
+})
 
 app.listen(PORT,() => console.log(`running on ${PORT} port`))
