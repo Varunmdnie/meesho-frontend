@@ -41,7 +41,7 @@ function SellerAdd() {
 
 
         try {
-            const response = await fetch("http://localhost:4000/api/products/addProduct", {
+            const response = await fetch("https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/products/addProduct", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

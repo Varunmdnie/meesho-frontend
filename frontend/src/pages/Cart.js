@@ -24,7 +24,7 @@ function Cart() {
     let handleRemove = (id, size) => {
         // dispatch(RemoveFromCart(id))
 
-        fetch('http://localhost:4000/api/cart/removeFromCart',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/removeFromCart',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -49,7 +49,7 @@ function Cart() {
 
     const handleIncrement = (id) => {
         // dispatch(IncrementQuantity(id));
-        fetch('http://localhost:4000/api/cart/incrementItem',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/incrementItem',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -74,7 +74,7 @@ function Cart() {
 
     const handleDecrement = (id) => {
         // dispatch(DecrementQuantity(id));
-        fetch('http://localhost:4000/api/cart/decrementItem',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/decrementItem',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -99,7 +99,7 @@ function Cart() {
 
     const handleImageClick = async (product) => {  
                          
-        fetch('http://localhost:4000/api/products/getProductById',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/products/getProductById',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -121,7 +121,7 @@ function Cart() {
 
     //fetching data backend to frontend
     useEffect(() =>{
-        fetch('http://localhost:4000/api/cart/fetchCart',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/fetchCart',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',

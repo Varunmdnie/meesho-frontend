@@ -14,7 +14,7 @@ const ForgetPassword = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:4000/api/users/forgetPassword', {
+            const response = await fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/users/forgetPassword', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

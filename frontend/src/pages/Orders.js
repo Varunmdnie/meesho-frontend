@@ -14,7 +14,7 @@ function Orders() {
 
     useEffect(() => {
 
-        fetch('http://localhost:4000/api/order/fetchOrderByUserId', {
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/order/fetchOrderByUserId', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -26,10 +26,10 @@ function Orders() {
         }).then((res) => res.json())
             .then((data) => {
                 if (data.status === 'success') {
-                    console.log(data.order);
+                    console.log(process.env);
                     
                     let cartIds = data.order.map((order)=>order.cart_id)
-                    fetch('http://localhost:4000/api/cart/fetchCartById', {
+                    fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/fetchCartById', {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json',

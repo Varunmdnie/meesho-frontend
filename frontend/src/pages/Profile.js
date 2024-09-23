@@ -22,7 +22,7 @@ function Profile() {
      let handleSubmit = async (e) =>{
         e.preventDefault(); 
         try {
-            const response = await fetch('http://localhost:4000/api/users/login', {
+            const response = await fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/users/login', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

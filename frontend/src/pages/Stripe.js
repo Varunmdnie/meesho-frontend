@@ -14,7 +14,7 @@ function Stripe({name,email,address,phoneNumber}) {
   const [cart,setCart] = useState([])
 
   useEffect(() =>{
-    fetch('http://localhost:4000/api/cart/fetchCart',{
+    fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/fetchCart',{
         method:'POST',
         headers:{
             'Content-Type':'application/json',
@@ -41,7 +41,7 @@ function Stripe({name,email,address,phoneNumber}) {
     const stripe = await stripePromise;
 
   
-    const response = await fetch('http://localhost:4000/api/cart/makePayment', {
+    const response = await fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/makePayment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
                  'Authorization':localStorage.getItem('userToken') },

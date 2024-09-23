@@ -33,7 +33,7 @@ function Payment() {
 
 
     useEffect(() =>{
-        fetch('http://localhost:4000/api/cart/fetchCart',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/fetchCart',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -62,7 +62,7 @@ function Payment() {
         e.preventDefault();
         
         try {
-            const response = await fetch("http://localhost:4000/api/order/orderAdd", {
+            const response = await fetch("https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/order/orderAdd", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -87,7 +87,7 @@ function Payment() {
                 toast.success('Order Placed Successfully');
                setTimeout(() => {
                  dispatch(updateCartCount(0))
-                 navigate('/orders')
+                //  navigate('/orders')
                }, 1000);
 
             } else {

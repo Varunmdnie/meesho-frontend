@@ -30,7 +30,7 @@ function  ProductDetails({ product }) {
         if(loggedInUser){
 
              // dispatch(AddToCart({ ...product, selectedSize }));
-        fetch('http://localhost:4000/api/cart/cartAdd',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/cart/cartAdd',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

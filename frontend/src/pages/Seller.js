@@ -16,7 +16,7 @@ function Seller() {
            
         //     navigate('/')
         // }      
-        fetch('http://localhost:4000/api/products/getProductsOfSeller', {
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/products/getProductsOfSeller', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -29,7 +29,7 @@ function Seller() {
 
     const updateStock = (id, type) => {
         // dispatch(IncrementQuantity(id));
-        fetch('http://localhost:4000/api/products/updateStock',{
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/products/updateStock',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

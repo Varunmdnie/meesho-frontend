@@ -7,7 +7,7 @@ import ProductItem from "../components/ProductItem"
 function Vests(){
     let [productsList, setProductsList] = useState([])
     useEffect(() =>{
-        fetch('http://localhost:4000/api/products/getProducts').then((res) => res.json())
+        fetch('https://meesho-backend-6mf21sb5z-varuns-projects-3f79aa73.vercel.app/api/products/getProducts').then((res) => res.json())
         .then((data) => setProductsList(data.products)).catch((err) => console.log(err))
     },[])
     let vests = productsList.filter((el) =>el.subCategory === 'vests')
